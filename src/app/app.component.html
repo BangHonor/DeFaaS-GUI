@@ -13,15 +13,23 @@
       <!-- 选项 -->
       <li nz-submenu nzOpen nzTitle="选项" nzIcon="dashboard">
         <ul>
+
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/welcome">欢迎</a>
           </li>
+
           <li nz-menu-item nzMatchRouter>
-            <a>账户</a>
+            <a routerLink="/account">账户</a>
           </li>
+
           <li nz-menu-item nzMatchRouter>
-            <a>FaaS 规格</a>
+            <a routerLink="/faaslevel">FaaS 规格</a>
           </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/console"> FaaS 控制台</a>
+          </li>
+
         </ul>
       </li>
       <!-- 帮助 -->
