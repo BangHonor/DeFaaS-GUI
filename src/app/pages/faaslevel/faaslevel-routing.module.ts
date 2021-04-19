@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 
-import { FaastokenComponent } from './faastoken.component';
+import { FaaslevelComponent } from './faaslevel.component'
 
 const routes: Routes = [
-  { path: '', component: FaastokenComponent },
+  { path: '', component: FaaslevelComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class FaastokenRoutingModule { }
+export class FaaslevelRoutingModule { }

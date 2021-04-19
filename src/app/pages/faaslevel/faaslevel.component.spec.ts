@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FaastokenComponent } from './faastoken.component';
+import { FaaslevelComponent } from './faaslevel.component';
 
-describe('FaastokenComponent', () => {
-  let component: FaastokenComponent;
-  let fixture: ComponentFixture<FaastokenComponent>;
+describe('FaaslevelComponent', () => {
+  let component: FaaslevelComponent;
+  let fixture: ComponentFixture<FaaslevelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FaastokenComponent ]
+      declarations: [ FaaslevelComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FaastokenComponent);
+    fixture = TestBed.createComponent(FaaslevelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
