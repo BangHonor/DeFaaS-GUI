@@ -9,27 +9,25 @@ import { Account, AccountService } from '../../core/account/account.service'
 })
 export class AccountComponent implements OnInit {
 
-  listOfData: Account[] = [
-    {
-      address: "0x01",
-      password: "123456",
-      balanceOf: "1",
-    },
-    {
-      address: "0x02",
-      password: "123456",
-      balanceOf: "2",
-    },
-    {
-      address: "0x03",
-      password: "123456",
-      balanceOf: "3",
-    },
-  ];
+  listOfAccount: Account[] = [];
 
-  constructor() { }
+  constructor(
+    private accountService: AccountService
+  ) { }
 
   ngOnInit(): void {
+    this.loadData()
   }
 
+  loadData(): void {
+
+    this.accountService.getListOfAccount().
+      subscribe(listOfAccount => this.listOfAccount = listOfAccount);
+
+  }
+
+  refreshBalanceOf(i: number) {
+    this.accountService.getBalanceOf(this.listOfAccount[i].address).subscribe(
+      newBalanceOf => this.listOfAccount[i].balanceOf = newBalanceOf);
+  }
 }

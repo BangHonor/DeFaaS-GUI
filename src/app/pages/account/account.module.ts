@@ -8,11 +8,13 @@ import { AccountComponent } from './account.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 const USED_NZ_MOUDLES = [
   NzTableModule,
   NzCardModule,
-  NzGridModule,
+  // NzGridModule,
+  NzIconModule,
 ];
 
 @NgModule({

@@ -3,15 +3,23 @@
     [nzTrigger]="null">
     <!-- Logo -->
     <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
+
+      <!-- <a href="/" target="_blank">
         <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+      </a> -->
+
+      <a href="//github.com/kitchent/defaas" target="_blank">
+        <i nz-icon nzType="github"></i>
         <h1>DeFaaS 平台</h1>
       </a>
+
     </div>
+
     <!-- 菜单 -->
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <!-- 选项 -->
-      <li nz-submenu nzOpen nzTitle="选项" nzIcon="dashboard">
+
+      <!-- 信息 -->
+      <li nz-submenu nzOpen nzTitle="信息" nzIcon="cloud">
         <ul>
 
           <li nz-menu-item nzMatchRouter>
@@ -19,21 +27,30 @@
           </li>
 
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/account">账户</a>
+            <a routerLink="/account">本地账户</a>
           </li>
 
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/faaslevel">FaaS 规格</a>
           </li>
 
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/console"> FaaS 控制台</a>
-          </li>
-
         </ul>
       </li>
+
+      <!-- 控制台 -->
+      <li nz-submenu nzOpen nzTitle="FaaS 控制台" nzIcon="code">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/funccode"> 函数代码</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/funcsvc"> 函数服务</a>
+          </li>
+        </ul>
+      </li>
+
       <!-- 帮助 -->
-      <li nz-submenu nzOpen nzTitle="帮助" nzIcon="form">
+      <li nz-submenu nzOpen nzTitle="帮助" nzIcon="bulb">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a>帮助1</a>
@@ -43,6 +60,8 @@
           </li>
         </ul>
       </li>
+
+
     </ul>
   </nz-sider>
   <nz-layout>

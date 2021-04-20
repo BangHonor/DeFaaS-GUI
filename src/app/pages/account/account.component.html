@@ -5,20 +5,28 @@
 
 
 <nz-card>
-    <nz-table #basicTable [nzData]="listOfData">
+    <nz-table #accountTable [nzData]="listOfAccount">
         <thead>
             <tr>
+                <th>序号</th>
                 <th>账户地址</th>
                 <th>密码</th>
                 <th>FaaS Token 余额</th>
-                <th>其他字段</th> 
+                <th>其他字段</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let data of basicTable.data">
-                <td>{{ data.address }}</td>
-                <td>{{ data.password }}</td>
-                <td>{{ data.balanceOf }}</td>
+            <tr *ngFor="let account of accountTable.data; let i = index;">
+                <td>{{ i+1 }}</td>
+                <td>{{ account.address }}</td>
+                <td>{{ account.password }}</td>
+                <td>
+                    {{ account.balanceOf }}
+                    <button nz-button (click)="refreshBalanceOf(i)" nzType="primary">
+                        <i nz-icon nzType="sync" nzTheme="outline"></i>
+                        刷新
+                    </button>
+                </td>
                 <td> - </td>
             </tr>
         </tbody>
