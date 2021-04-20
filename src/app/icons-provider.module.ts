@@ -11,6 +11,8 @@ import {
   CodeOutline,
   BulbOutline,
   GithubOutline,
+  EyeOutline,
+  EyeInvisibleOutline,
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -23,6 +25,8 @@ const icons = [
   CodeOutline,
   BulbOutline,
   GithubOutline,
+  EyeOutline,
+  EyeInvisibleOutline,
 ];
 
 @NgModule({

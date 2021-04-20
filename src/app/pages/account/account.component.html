@@ -1,34 +1,44 @@
-<p>account works!</p>
+<div nz-row [nzGutter]="24" class="pt-lg">
+    <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12">
+        <nz-card>
+            <app-account-creater (created)="loadListOfAccount()">
+            </app-account-creater>
+        </nz-card>
+    </div>
+    <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12">
+    </div>
+</div>
 
 
-这一页画一个账户的列表。
-
-
-<nz-card>
-    <nz-table #accountTable [nzData]="listOfAccount">
-        <thead>
-            <tr>
-                <th>序号</th>
-                <th>账户地址</th>
-                <th>密码</th>
-                <th>FaaS Token 余额</th>
-                <th>其他字段</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let account of accountTable.data; let i = index;">
-                <td>{{ i+1 }}</td>
-                <td>{{ account.address }}</td>
-                <td>{{ account.password }}</td>
-                <td>
-                    {{ account.balanceOf }}
-                    <button nz-button (click)="refreshBalanceOf(i)" nzType="primary">
-                        <i nz-icon nzType="sync" nzTheme="outline"></i>
-                        刷新
-                    </button>
-                </td>
-                <td> - </td>
-            </tr>
-        </tbody>
-    </nz-table>
-</nz-card>
+<div nz-row [nzGutter]="24" class="pt-lg">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+        <nz-card>
+            <nz-table #accountTable [nzData]="listOfAccount">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>账户地址</th>
+                        <th>密码</th>
+                        <th>FaaS Token 余额</th>
+                        <th>其他字段</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let account of accountTable.data, let i = index">
+                        <td>{{ i+1 }}</td>
+                        <td>{{ account.address }}</td>
+                        <td>{{ account.password }}</td>
+                        <td>
+                            {{ account.balanceOf }}
+                            <button nz-button (click)="refreshBalanceOf(i)" nzType="primary">
+                                <i nz-icon nzType="sync" nzTheme="outline"></i>
+                                <span>刷新</span>
+                            </button>
+                        </td>
+                        <td> - </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </nz-card>
+    </div>
+</div>

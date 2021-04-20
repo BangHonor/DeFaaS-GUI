@@ -11,23 +11,28 @@ export class AccountComponent implements OnInit {
 
   listOfAccount: Account[] = [];
 
+  newAccountModalIsVisible: boolean = false;
+
   constructor(
     private accountService: AccountService
   ) { }
 
   ngOnInit(): void {
-    this.loadData()
+    this.loadListOfAccount();
   }
 
-  loadData(): void {
+  loadListOfAccount(): void {
 
     this.accountService.getListOfAccount().
-      subscribe(listOfAccount => this.listOfAccount = listOfAccount);
+      subscribe(listOfAccount => this.listOfAccount = [...listOfAccount]);
+
+    console.log(this.listOfAccount);
 
   }
 
   refreshBalanceOf(i: number) {
-    this.accountService.getBalanceOf(this.listOfAccount[i].address).subscribe(
-      newBalanceOf => this.listOfAccount[i].balanceOf = newBalanceOf);
+    this.accountService.getBalanceOf(this.listOfAccount[i].address).
+      subscribe(newBalanceOf => this.listOfAccount[i].balanceOf = newBalanceOf);
   }
+
 }

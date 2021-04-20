@@ -21,40 +21,42 @@ export interface Account {
 
 export class AccountService extends ServiceErrorHandler {
 
+  listOfAccount: Account[] = [
+    {
+      address: "0x01",
+      password: "123456",
+      balanceOf: "1",
+    },
+    {
+      address: "0x02",
+      password: "123456",
+      balanceOf: "2",
+    },
+  ];
+
   constructor(private http: HttpClient) {
     super()
   }
 
   getListOfAccount(): Observable<Account[]> {
-
-    let listOfAccount: Account[] = [
-      {
-        address: "0x01",
-        password: "123456",
-        balanceOf: "1",
-      },
-      {
-        address: "0x02",
-        password: "123456",
-        balanceOf: "2",
-      },
-      {
-        address: "0x03",
-        password: "123456",
-        balanceOf: "3",
-      },
-      {
-        address: "0x04",
-        password: "123456",
-        balanceOf: "4",
-      },
-    ];
-
-    return of(listOfAccount);
+    return of(this.listOfAccount);
   }
 
   getBalanceOf(address: string): Observable<string> {
     return of("100");
+  }
+
+  createAccount(password: string): Observable<Account> {
+
+    let account: Account = {
+      address: "0x000new",
+      password: password,
+      balanceOf: "0",
+    };
+
+    this.listOfAccount.push(account)
+
+    return of(account);
   }
 
 }
