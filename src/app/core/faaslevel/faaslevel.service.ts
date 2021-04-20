@@ -8,7 +8,7 @@ import { catchError, retry } from 'rxjs/operators';
 
 import { WrapRes, ServiceErrorHandler } from '../wrap'
 
-export interface FaaSLevel {
+export interface FaaSLevel {//FaaSLevel API
   id: string;
   cpu: string;
   mem: string;
@@ -24,8 +24,7 @@ export interface ListData {
 })
 export class FaaslevelService extends ServiceErrorHandler {
 
-  constructor(
-    private http: HttpClient) {
+  constructor(private http: HttpClient) {
     super()
   }
 

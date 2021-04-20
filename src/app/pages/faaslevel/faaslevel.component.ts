@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-
 import { FaaSLevel, FaaslevelService } from '../../core/faaslevel/faaslevel.service'
 
-interface Person {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-}
 
 @Component({
   selector: 'app-faaslevel',

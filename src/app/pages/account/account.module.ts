@@ -5,13 +5,24 @@ import { AccountRoutingModule } from './account-routing.module';
 import { AccountComponent } from './account.component';
 
 
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+
+const USED_NZ_MOUDLES = [
+  NzTableModule,
+  NzCardModule,
+  NzGridModule,
+];
+
 @NgModule({
   declarations: [
     AccountComponent
   ],
   imports: [
     CommonModule,
-    AccountRoutingModule
+    AccountRoutingModule,
+    ...USED_NZ_MOUDLES
   ]
 })
 export class AccountModule { }
