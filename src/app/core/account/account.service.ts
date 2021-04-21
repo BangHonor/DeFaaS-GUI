@@ -47,7 +47,6 @@ export class AccountService extends ServiceErrorHandler {
   }
 
   createAccount(password: string): Observable<Account> {
-
     let account: Account = {
       address: "0x000new",
       password: password,
@@ -55,7 +54,7 @@ export class AccountService extends ServiceErrorHandler {
     };
 
     this.listOfAccount.push(account)
-
+    //前端创建account，添加到后台
     return of(account);
   }
 

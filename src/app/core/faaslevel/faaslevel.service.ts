@@ -38,7 +38,6 @@ export class FaaslevelService extends ServiceErrorHandler {
 
     return of(levels)
   }
-
 }
 
 
