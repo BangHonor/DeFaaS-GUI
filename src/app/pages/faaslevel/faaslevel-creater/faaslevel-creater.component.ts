@@ -1,9 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { NzModalService } from 'ng-zorro-antd/modal';
-import { NzMessageService } from 'ng-zorro-antd/message';
-
-import { FaaSLevel, FaaslevelService } from '../../../core/faaslevel/faaslevel.service'
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-faaslevel-creater',
@@ -12,18 +7,9 @@ import { FaaSLevel, FaaslevelService } from '../../../core/faaslevel/faaslevel.s
 })
 export class FaaslevelCreaterComponent implements OnInit {
 
-  @Output() created = new EventEmitter<FaaSLevel>();
-
-  constructor(
-    private modal: NzModalService,
-    private message: NzMessageService,
-    private fasslevelService: FaaslevelService) { }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  createFaasLevel(): void {
-      
   }
 
 }

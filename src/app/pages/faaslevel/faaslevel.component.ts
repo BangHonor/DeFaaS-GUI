@@ -8,6 +8,7 @@ import { FaaSLevel, FaaslevelService } from '../../core/faaslevel/faaslevel.serv
   templateUrl: './faaslevel.component.html',
   styleUrls: ['./faaslevel.component.less']
 })
+
 export class FaaslevelComponent implements OnInit {
 
   listOfData: FaaSLevel[] = [

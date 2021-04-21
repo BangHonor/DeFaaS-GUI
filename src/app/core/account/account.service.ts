@@ -54,7 +54,7 @@ export class AccountService extends ServiceErrorHandler {
     };
 
     this.listOfAccount.push(account)
-    //前端创建account，添加到后台
+
     return of(account);
   }
 

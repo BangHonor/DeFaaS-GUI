@@ -1,36 +1,35 @@
-<p>faaslevel works!</p>
-
-
-这一页画一个FaaS 规格的列表。
-
-
-<nz-card>
-    <nz-table #basicTable [nzData]="listOfData">
-        <thead>
-            <tr>
-                <th>FaaS Level ID</th>
-                <th>CPU 核心数</th>
-                <th>使用内存</th>
-                <th>其他字段</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let data of basicTable.data">
-                <td>{{ data.id }}</td>
-                <td>{{ data.cpu }}</td>
-                <td>{{ data.mem }}</td>
-                <td> - </td>
-            </tr>
-        </tbody>
-    </nz-table>
-    <button nz-button  nzType="primary">
-        <span>新建FaaSLevel</span>
-    </button>
-</nz-card>
+<div nz-row [nzGutter]="24" class="pt-lg">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+        <nz-card>
+            <button nz-button nzType="primary">
+                <span>新建FaaSLevel</span>
+            </button>
+        </nz-card>
+    </div>
+</div>
 
 
 <div nz-row [nzGutter]="24" class="pt-lg">
     <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
-        <p>test p</p>
+        <nz-card>
+            <nz-table #basicTable [nzData]="listOfData">
+                <thead>
+                    <tr>
+                        <th>FaaS Level ID</th>
+                        <th>CPU 核心数</th>
+                        <th>使用内存</th>
+                        <th>其他字段</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of basicTable.data">
+                        <td>{{ data.id }}</td>
+                        <td>{{ data.cpu }}</td>
+                        <td>{{ data.mem }}</td>
+                        <td> - </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </nz-card>
     </div>
 </div>

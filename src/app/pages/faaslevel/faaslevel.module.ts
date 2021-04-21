@@ -8,6 +8,7 @@ import { FaaslevelComponent } from './faaslevel.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { FaaslevelCreaterComponent } from './faaslevel-creater/faaslevel-creater.component';
 
 const USED_NZ_MOUDLES = [
   NzTableModule,
@@ -18,7 +19,8 @@ const USED_NZ_MOUDLES = [
 
 @NgModule({
   declarations: [
-    FaaslevelComponent
+    FaaslevelComponent,
+    FaaslevelCreaterComponent
   ],
   imports: [
     CommonModule,
