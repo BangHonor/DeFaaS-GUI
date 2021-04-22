@@ -1,16 +1,4 @@
 <div nz-row [nzGutter]="24" class="pt-lg">
-    <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12">
-        <nz-card>
-            <app-account-creater (created)="loadListOfAccount()">
-            </app-account-creater>
-        </nz-card>
-    </div>
-    <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12">
-    </div>
-</div>
-
-
-<div nz-row [nzGutter]="24" class="pt-lg">
     <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
         <nz-card>
             <nz-table #accountTable [nzData]="listOfAccount">
@@ -20,7 +8,7 @@
                         <th>账户地址</th>
                         <th>密码</th>
                         <th>FaaS Token 余额</th>
-                        <th>其他字段</th>
+                        <th>详情</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,10 +23,29 @@
                                 <span>刷新</span>
                             </button>
                         </td>
-                        <td> - </td>
+                        <td>
+                            <button nz-button nzType="primary">
+                                <i nz-icon nzType="form" nzTheme="outline"></i>
+                                <a routerLink="/account/detail/{{account.address}}">
+                                    <span>操作</span>
+                                </a>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </nz-table>
         </nz-card>
+    </div>
+</div>
+
+
+<div nz-row [nzGutter]="24" class="pt-lg">
+    <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12">
+        <nz-card>
+            <app-account-creater (created)="loadListOfAccount()">
+            </app-account-creater>
+        </nz-card>
+    </div>
+    <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12">
     </div>
 </div>

@@ -34,7 +34,7 @@ export class AccountCreaterComponent implements OnInit {
           this.createAccount();
           resolve();
         }).then(
-          _ => this.message.info('新建本地账户成功'),
+          _ => this.message.success('新建本地账户成功'),
           _ => this.message.info('新建本地账户失败')
         ),
       nzOnCancel: () => this.message.info('取消新建本地账户'),
