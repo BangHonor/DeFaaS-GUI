@@ -39,7 +39,7 @@ export class AccountDetailComponent implements OnInit {
     this.location.back();
   }
 
-  witnessLogin(): void {
+  onWitnessLogin(): void {
 
     this.modal.confirm({
       nzTitle: '<i>是否注册为证人？</i>',
@@ -57,7 +57,7 @@ export class AccountDetailComponent implements OnInit {
     this.reloadAccount();
   }
 
-  witnessLogout(): void {
+  onWitnessLogout(): void {
 
     this.modal.confirm({
       nzTitle: '<i>是否注销证人资格？</i>',
@@ -75,7 +75,7 @@ export class AccountDetailComponent implements OnInit {
     this.reloadAccount();
   }
 
-  providerLogin(): void {
+  onProviderLogin(): void {
 
     // TODO 调用 service
     this.account.isProvider = true;
@@ -83,7 +83,7 @@ export class AccountDetailComponent implements OnInit {
     this.reloadAccount();
   }
 
-  providerLogout(): void {
+  onProviderLogout(): void {
 
     // TODO 调用 service
     this.reloadAccount();

@@ -27,13 +27,13 @@
                     <div *ngIf="account.isWitness; then yesWitness else noWitness"></div>
                     <ng-template #yesWitness>
                         <span>是</span>
-                        <button nz-button nzType="primary" (click)="witnessLogout()">
+                        <button nz-button nzType="primary" (click)="onWitnessLogout()">
                             <span>注销</span>
                         </button>
                     </ng-template>
                     <ng-template #noWitness>
                         <span>否</span>
-                        <button nz-button nzType="primary" (click)="witnessLogin()">
+                        <button nz-button nzType="primary" (click)="onWitnessLogin()">
                             <span>注册</span>
                         </button>
                     </ng-template>
@@ -63,13 +63,13 @@
                     <div *ngIf="account.isProvider; then yesProvider else noProvider"></div>
                     <ng-template #yesProvider>
                         <span>是</span>
-                        <button nz-button nzType="primary" (click)="providerLogout()">
+                        <button nz-button nzType="primary" (click)="onProviderLogout()">
                             <span>注销</span>
                         </button>
                     </ng-template>
                     <ng-template #noProvider>
                         <span>否</span>
-                        <button nz-button nzType="primary" (click)="providerLogin()">
+                        <button nz-button nzType="primary" (click)="onProviderLogin()">
                             <span>注册</span>
                         </button>
                     </ng-template>
