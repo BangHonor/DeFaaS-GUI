@@ -18,15 +18,15 @@
                         <td>{{ account.password }}</td>
                         <td>
                             {{ account.balanceOf }}
-                            <button nz-button (click)="refreshBalanceOf(i)" nzType="primary">
+                            <button nz-button (click)="onRefreshBalanceOf(i)" nzType="primary">
                                 <i nz-icon nzType="sync" nzTheme="outline"></i>
                                 <span>刷新</span>
                             </button>
                         </td>
                         <td>
                             <button nz-button nzType="primary">
-                                <i nz-icon nzType="form" nzTheme="outline"></i>
                                 <a routerLink="/account/detail/{{account.address}}">
+                                    <i nz-icon nzType="form" nzTheme="outline"></i>
                                     <span>操作</span>
                                 </a>
                             </button>
@@ -42,7 +42,7 @@
 <div nz-row [nzGutter]="24" class="pt-lg">
     <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12">
         <nz-card>
-            <app-account-creater (created)="loadListOfAccount()">
+            <app-account-creater (created)="onCreated()">
             </app-account-creater>
         </nz-card>
     </div>

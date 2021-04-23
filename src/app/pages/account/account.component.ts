@@ -18,10 +18,10 @@ export class AccountComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadListOfAccount();
+    this.reloadListOfAccount();
   }
 
-  loadListOfAccount(): void {
+  reloadListOfAccount(): void {
 
     this.accountService.getListOfAccount().
       subscribe(listOfAccount => this.listOfAccount = [...listOfAccount]);
@@ -30,9 +30,14 @@ export class AccountComponent implements OnInit {
 
   }
 
-  refreshBalanceOf(i: number) {
-    this.accountService.getBalanceOf(this.listOfAccount[i].address).
-      subscribe(newBalanceOf => this.listOfAccount[i].balanceOf = newBalanceOf);
+  onRefreshBalanceOf(id: number) {
+    this.accountService.getBalanceOf(this.listOfAccount[id].address).
+      subscribe(newBalanceOf => this.listOfAccount[id].balanceOf = newBalanceOf);
+    // this.reloadListOfAccount();
+  }
+
+  onCreated(): void {
+    this.reloadListOfAccount();
   }
 
 }

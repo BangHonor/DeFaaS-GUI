@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { Account, AccountService } from '../../../core/account/account.service'
 
@@ -19,7 +18,6 @@ export class AccountCreaterComponent implements OnInit {
 
   constructor(
     private modal: NzModalService,
-    private message: NzMessageService,
     private accountService: AccountService) { }
 
   ngOnInit(): void {
@@ -33,11 +31,8 @@ export class AccountCreaterComponent implements OnInit {
         new Promise<void>((resolve, reject) => {
           this.createAccount();
           resolve();
-        }).then(
-          _ => this.message.success('新建本地账户成功'),
-          _ => this.message.info('新建本地账户失败')
-        ),
-      nzOnCancel: () => this.message.info('取消新建本地账户'),
+        }).catch(error => console.log(error)),
+      nzOnCancel: () => { },
     });
   }
 

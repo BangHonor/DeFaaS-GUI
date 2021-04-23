@@ -15,24 +15,28 @@
                 </nz-descriptions-item>
 
                 <nz-descriptions-item nzTitle="ETH">
-                    00.00
+                    {{account.eth}}
                 </nz-descriptions-item>
                 <nz-descriptions-item nzTitle="FaaS Token" [nzSpan]="2">
-                    0
+                    {{account.balanceOf}}
                 </nz-descriptions-item>
 
 
-
-                <nz-descriptions-item nzTitle="是否为证人（二选一）">
-                    <span>否</span>
-                    <button nz-button nzType="primary">
-                        <span>注册</span>
-                    </button>
-                    <br />
-                    <span>是</span>
-                    <button nz-button nzType="primary">
-                        <span>注销</span>
-                    </button>
+                <nz-descriptions-item nzTitle="是否为证人">
+                    <!-- 文档 https://angular.cn/api/common/NgIf -->
+                    <div *ngIf="account.isWitness; then yesWitness else noWitness"></div>
+                    <ng-template #yesWitness>
+                        <span>是</span>
+                        <button nz-button nzType="primary" (click)="witnessLogout()">
+                            <span>注销</span>
+                        </button>
+                    </ng-template>
+                    <ng-template #noWitness>
+                        <span>否</span>
+                        <button nz-button nzType="primary" (click)="witnessLogin()">
+                            <span>注册</span>
+                        </button>
+                    </ng-template>
                 </nz-descriptions-item>
                 <nz-descriptions-item nzTitle="证人状态（三选一）">
                     <nz-badge nzStatus="default" nzText="离线"></nz-badge>
@@ -55,16 +59,20 @@
                 </nz-descriptions-item>
 
 
-                <nz-descriptions-item nzTitle="是否为供应商（二选一）">
-                    <span>否</span>
-                    <button nz-button nzType="primary">
-                        <span>注册</span>
-                    </button>
-                    <br />
-                    <span>是</span>
-                    <button nz-button nzType="primary">
-                        <span>注销</span>
-                    </button>
+                <nz-descriptions-item nzTitle="是否为供应商">
+                    <div *ngIf="account.isProvider; then yesProvider else noProvider"></div>
+                    <ng-template #yesProvider>
+                        <span>是</span>
+                        <button nz-button nzType="primary" (click)="providerLogout()">
+                            <span>注销</span>
+                        </button>
+                    </ng-template>
+                    <ng-template #noProvider>
+                        <span>否</span>
+                        <button nz-button nzType="primary" (click)="providerLogin()">
+                            <span>注册</span>
+                        </button>
+                    </ng-template>
                 </nz-descriptions-item>
                 <nz-descriptions-item nzTitle="供应商状态（二选一）" [nzSpan]="2">
                     <nz-badge nzStatus="default" nzText="未服务"></nz-badge>
