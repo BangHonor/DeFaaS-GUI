@@ -39,17 +39,26 @@
                     </ng-template>
                 </nz-descriptions-item>
                 <nz-descriptions-item nzTitle="证人状态（三选一）">
-                    <nz-badge nzStatus="default" nzText="离线"></nz-badge>
-                    <button nz-button nzType="primary">
-                        <span>上线</span>
-                    </button>
-                    <br />
-                    <nz-badge nzStatus="success" nzText="在线"></nz-badge>
-                    <button nz-button nzType="primary">
-                        <span>下线</span>
-                    </button>
-                    <br />
-                    <nz-badge nzStatus="processing" nzText="忙碌"></nz-badge>
+                    <div *ngIf="account.witnessState=='online';then witnessOnline"></div>
+                    <div *ngIf="account.witnessState!='online'&&account.witnessState!='busy';then witnessOffline"></div>
+                    <div *ngIf="account.witnessState=='busy';then witnessBusy"></div>
+                    <ng-template #witnessOffline>
+                        <nz-badge nzStatus="default" nzText="离线"></nz-badge>
+                        <button nz-button nzType="primary" (click)="onWitnessOnline()">
+                            <span>上线</span>
+                        </button>
+                        <br />
+                    </ng-template>
+                    <ng-template #witnessOnline>
+                        <nz-badge nzStatus="success" nzText="在线"></nz-badge>
+                        <button nz-button nzType="primary" (click)="onWitnessOffline()">
+                            <span>下线</span>
+                        </button>
+                        <br />
+                    </ng-template>
+                    <ng-template #witnessBusy>
+                        <nz-badge nzStatus="processing" nzText="忙碌"></nz-badge>
+                    </ng-template>
                 </nz-descriptions-item>
                 <nz-descriptions-item nzTitle="证人收益">
                     0
@@ -75,15 +84,20 @@
                     </ng-template>
                 </nz-descriptions-item>
                 <nz-descriptions-item nzTitle="供应商状态（二选一）" [nzSpan]="2">
-                    <nz-badge nzStatus="default" nzText="未服务"></nz-badge>
-                    <button nz-button nzType="primary">
-                        <span>启动服务</span>
-                    </button>
-                    <br />
-                    <nz-badge nzStatus="processing" nzText="服务中"></nz-badge>
-                    <button nz-button nzType="primary">
-                        <span>停止服务</span>
-                    </button>
+                    <div *ngIf="account.providerState=='online'; then providerOnline else providerOffline"></div>
+                    <ng-template #providerOnline>
+                        <nz-badge nzStatus="default" nzText="未服务"></nz-badge>
+                        <button nz-button nzType="primary" (click)="onProviderOffline()">
+                            <span>启动服务</span>
+                        </button>
+                        <br />
+                    </ng-template>
+                    <ng-template #providerOffline>
+                        <nz-badge nzStatus="processing" nzText="服务中"></nz-badge>
+                        <button nz-button nzType="primary" (click)="onProviderOnline()">
+                            <span>停止服务</span>
+                        </button>
+                    </ng-template>
                 </nz-descriptions-item>
 
 
