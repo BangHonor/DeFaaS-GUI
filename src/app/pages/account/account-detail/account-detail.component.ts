@@ -77,16 +77,105 @@ export class AccountDetailComponent implements OnInit {
 
   onProviderLogin(): void {
 
-    // TODO 调用 service
-    this.account.isProvider = true;
+    this.modal.confirm({
+      nzTitle: '<i>是否注册为供应商？</i>',
+      nzContent: '<b>注册供应商将需要支付 0 押金</b>',
+      nzOnOk: () =>
+        new Promise<void>((resolve, reject) => {
+
+          this.accountService.providerLogin(this.account.address);
+          resolve();
+
+        }).catch(error => console.log(error)),
+      nzOnCancel: () => { },
+    });
 
     this.reloadAccount();
   }
 
   onProviderLogout(): void {
 
-    // TODO 调用 service
-    this.reloadAccount();
+    this.modal.confirm({
+      nzTitle: '<i>是否注销供应商资格？</i>',
+      nzContent: '<b>注销供应商资格将可以取回 0 押金</b>',
+      nzOnOk: () =>
+        new Promise<void>((resolve, reject) => {
 
+          this.accountService.providerLogout(this.account.address);
+          resolve();
+
+        }).catch(error => console.log(error)),
+      nzOnCancel: () => { },
+    });
+
+    this.reloadAccount();
+  }
+
+  onWitnessOnline(address: string): void {
+
+    this.modal.confirm({
+      nzTitle: '<i>是否将证人上线？</i>',
+      nzOnOk: () =>
+        new Promise<void>((resolve, reject) => {
+
+          this.accountService.witnessOnline(this.account.address);
+          resolve();
+
+        }).catch(error => console.log(error)),
+      nzOnCancel: () => { },
+    });
+
+    this.reloadAccount();
+  }
+
+  onWitnessOffline(address: string): void {
+
+    this.modal.confirm({
+      nzTitle: '<i>是否将证人下线？</i>',
+      nzOnOk: () =>
+        new Promise<void>((resolve, reject) => {
+
+          this.accountService.witnessOffline(this.account.address);
+          resolve();
+
+        }).catch(error => console.log(error)),
+      nzOnCancel: () => { },
+    });
+
+    this.reloadAccount();
+  }
+
+  onProviderOnline(address: string): void {
+
+    this.modal.confirm({
+      nzTitle: '<i>是否将供应商上线？</i>',
+      nzOnOk: () =>
+        new Promise<void>((resolve, reject) => {
+
+          this.accountService.providerOnline(this.account.address);
+          resolve();
+
+        }).catch(error => console.log(error)),
+      nzOnCancel: () => { },
+    });
+
+    this.reloadAccount();
+  }
+
+  onProviderOffline(address: string): void {
+
+    this.modal.confirm({
+      nzTitle: '<i>是否将供应商下线？</i>',
+      nzOnOk: () =>
+        new Promise<void>((resolve, reject) => {
+
+          this.accountService.providerOffline(this.account.address);
+          resolve();
+
+        }).catch(error => console.log(error)),
+      nzOnCancel: () => { },
+    });
+
+    this.reloadAccount();
   }
 }

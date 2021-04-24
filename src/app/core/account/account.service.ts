@@ -15,7 +15,7 @@ export interface Account {
   balanceOf: string;
   eth?: string;
   isWitness?: boolean;
-  witnessState?: boolean;
+  witnessState?: string;
   witnessReward?: string;
   isProvider?: boolean;
   providerState?: string;
@@ -127,4 +127,60 @@ export class AccountService extends ServiceErrorHandler {
     this.message.success('注销证人成功');
   }
 
+  providerLogin(address: string): void {
+
+    let account: Account = this.accounts.get(address);
+    account.isProvider = true;
+    this.accounts.set(address, account);
+
+    this.message.success('注册供应商成功');
+  }
+
+  providerLogout(address: string): void {
+
+    let account: Account = this.accounts.get(address);
+    account.isProvider = false;
+    this.accounts.set(address, account);
+
+    this.message.success('注销供应商成功');
+  }
+
+  witnessOnline(address: string): void {
+
+    let account: Account = this.accounts.get(address);
+    account.witnessState = "online";
+
+    this.accounts.set(address, account);
+
+    this.message.success('证人上线成功');
+  }
+
+  witnessOffline(address: string): void {
+
+    let account: Account = this.accounts.get(address);
+    account.witnessState = "offline";
+
+    this.accounts.set(address, account);
+
+    this.message.success('证人下线成功');
+  }
+  providerOnline(address: string): void {
+
+    let account: Account = this.accounts.get(address);
+    account.providerState = "online";
+
+    this.accounts.set(address, account);
+
+    this.message.success('供应商上线成功');
+  }
+
+  providerOffline(address: string): void {
+
+    let account: Account = this.accounts.get(address);
+    account.providerState = "offline";
+
+    this.accounts.set(address, account);
+
+    this.message.success('供应商下线成功');
+  }
 }
