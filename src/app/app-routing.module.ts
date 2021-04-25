@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'funccode', loadChildren: () => import('./pages/funccode/funccode.module').then(m => m.FunccodeModule) },
   { path: 'funcsvc', loadChildren: () => import('./pages/funcsvc/funcsvc.module').then(m => m.FuncsvcModule) },
   { path: 'user-manual', loadChildren: () => import('./pages/user-manual/user-manual.module').then(m => m.UserManualModule) },
+  { path: 'api-doc', loadChildren: () => import('./pages/api-doc/api-doc.module').then(m => m.ApiDocModule) }
 ];
 
 @NgModule({

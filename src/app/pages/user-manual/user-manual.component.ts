@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+
+// import { MarkdownPipe } from '../../pipes/markdown/markdwon.pipe';
+
+
 @Component({
   selector: 'app-user-manual',
   templateUrl: './user-manual.component.html',
