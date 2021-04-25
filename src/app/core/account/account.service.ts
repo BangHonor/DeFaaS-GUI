@@ -19,7 +19,7 @@ export interface Account {
   witnessReward?: string;
   isProvider?: boolean;
   providerState?: string;
-  otherInfo?: string[];
+  otherInfo?: string;
 }
 
 
@@ -37,8 +37,8 @@ export class AccountService extends ServiceErrorHandler {
   constructor(
     private http: HttpClient,
     private message: NzMessageService) {
-    super();
 
+    super();
     this.loadAccountsFromServer();
   }
 
@@ -50,9 +50,16 @@ export class AccountService extends ServiceErrorHandler {
       address: "0x000origin",
       password: "123456",
       balanceOf: "1",
+      eth: "0",
+      isWitness: false,
+      witnessState: "offline",
+      witnessReward: "0",
+      isProvider: false,
+      providerState: "offline",
+      otherInfo: "Haha",
     };
 
-    this.accounts.set("0x000origin", origin);
+    this.accounts.set(origin.address, origin);
 
     this.message.success('加载本地账户数据成功');
   }
@@ -89,6 +96,13 @@ export class AccountService extends ServiceErrorHandler {
       address: "0x000" + this.accounts.size,
       password: password,
       balanceOf: "0",
+      eth: "0",
+      isWitness: false,
+      witnessState: "offline",
+      witnessReward: "0",
+      isProvider: false,
+      providerState: "offline",
+      otherInfo: "Haha",
     };
 
     this.accounts.set(account.address, account);
@@ -164,6 +178,7 @@ export class AccountService extends ServiceErrorHandler {
 
     this.message.success('证人下线成功');
   }
+
   providerOnline(address: string): void {
 
     let account: Account = this.accounts.get(address);
