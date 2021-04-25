@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AccountRoutingModule } from './account-routing.module';
@@ -18,6 +18,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 const USED_NZ_MOUDLES = [
   NzTableModule,
@@ -28,6 +30,8 @@ const USED_NZ_MOUDLES = [
   NzInputModule,
   NzDescriptionsModule,
   NzBadgeModule,
+  NzDrawerModule,
+  NzFormModule,
 ];
 
 @NgModule({
@@ -39,6 +43,7 @@ const USED_NZ_MOUDLES = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     AccountRoutingModule,
     ...USED_NZ_MOUDLES
   ]

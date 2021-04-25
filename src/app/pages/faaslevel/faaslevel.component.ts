@@ -11,29 +11,14 @@ import { FaaSLevel, FaaslevelService } from '../../core/faaslevel/faaslevel.serv
 
 export class FaaslevelComponent implements OnInit {
 
-  listOfData: FaaSLevel[] = [
-    {
-      id: '0',
-      cpu: '1',
-      mem: '512',
-    },
-    {
-      id: '1',
-      cpu: '1',
-      mem: '1024',
-    },
-    {
-      id: '2',
-      cpu: '2',
-      mem: '2048',
-    },
-  ];
+  listOfFaaSLevel: FaaSLevel[];
 
   constructor() { }
 
-
-
   ngOnInit(): void {
+
   }
+
+  onCreated(): void { }
 
 }

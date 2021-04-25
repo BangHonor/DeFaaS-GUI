@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+
+import { FaaSLevel, FaaslevelService } from '../../../core/faaslevel/faaslevel.service'
+
 
 @Component({
   selector: 'app-faaslevel-creater',
@@ -6,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./faaslevel-creater.component.less']
 })
 export class FaaslevelCreaterComponent implements OnInit {
+
+  @Output() created = new EventEmitter<FaaSLevel>();
+
 
   constructor() { }
 

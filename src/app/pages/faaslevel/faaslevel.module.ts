@@ -20,7 +20,7 @@ const USED_NZ_MOUDLES = [
 @NgModule({
   declarations: [
     FaaslevelComponent,
-    FaaslevelCreaterComponent
+    FaaslevelCreaterComponent,
   ],
   imports: [
     CommonModule,

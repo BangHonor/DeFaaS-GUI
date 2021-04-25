@@ -1,6 +1,15 @@
 <div nz-row [nzGutter]="24" class="pt-lg">
     <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
         <nz-card>
+            <app-account-creater (created)="onCreated()">
+            </app-account-creater>
+        </nz-card>
+    </div>
+</div>
+
+<div nz-row [nzGutter]="24" class="pt-lg">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+        <nz-card>
             <nz-table #accountTable [nzData]="listOfAccount">
                 <thead>
                     <tr>
@@ -35,17 +44,5 @@
                 </tbody>
             </nz-table>
         </nz-card>
-    </div>
-</div>
-
-
-<div nz-row [nzGutter]="24" class="pt-lg">
-    <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12">
-        <nz-card>
-            <app-account-creater (created)="onCreated()">
-            </app-account-creater>
-        </nz-card>
-    </div>
-    <div nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12">
     </div>
 </div>

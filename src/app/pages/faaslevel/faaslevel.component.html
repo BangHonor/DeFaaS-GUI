@@ -1,9 +1,7 @@
 <div nz-row [nzGutter]="24" class="pt-lg">
     <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
         <nz-card>
-            <button nz-button nzType="primary">
-                <span>新建FaaSLevel</span>
-            </button>
+            <app-faaslevel-creater (created)="onCreated()"></app-faaslevel-creater>
         </nz-card>
     </div>
 </div>
@@ -12,7 +10,7 @@
 <div nz-row [nzGutter]="24" class="pt-lg">
     <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
         <nz-card>
-            <nz-table #basicTable [nzData]="listOfData">
+            <nz-table #faaslevelTable [nzData]="listOfFaaSLevel">
                 <thead>
                     <tr>
                         <th>FaaS Level ID</th>
@@ -22,10 +20,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let data of basicTable.data">
-                        <td>{{ data.id }}</td>
-                        <td>{{ data.cpu }}</td>
-                        <td>{{ data.mem }}</td>
+                    <tr *ngFor="let faaslevel of faaslevelTable.data">
+                        <td>{{ faaslevel.id }}</td>
+                        <td>{{ faaslevel.cpu }}</td>
+                        <td>{{ faaslevel.mem }}</td>
                         <td> - </td>
                     </tr>
                 </tbody>
