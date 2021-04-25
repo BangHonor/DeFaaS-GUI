@@ -13,12 +13,21 @@ export class FaaslevelComponent implements OnInit {
 
   listOfFaaSLevel: FaaSLevel[];
 
-  constructor() { }
+  constructor(private faaslevelService:FaaslevelService) { }
 
   ngOnInit(): void {
-
+    this.reloadListOfFaaSLevel();
   }
 
-  onCreated(): void { }
+  reloadListOfFaaSLevel(): void {
 
+    this.faaslevelService.getListOfFaaSLevel().
+      subscribe(ListOfFaaSLevel => this.listOfFaaSLevel = [...ListOfFaaSLevel]);
+
+    console.log(this.listOfFaaSLevel);
+  }
+
+  onCreated(): void {
+    this.reloadListOfFaaSLevel();
+  }
 }

@@ -49,8 +49,6 @@ export class AccountCreaterComponent implements OnInit {
 
   onCreated(): void {
 
-
-
     this.modal.confirm({
 
       nzTitle: '<i>新建一个本地账户？</i>',

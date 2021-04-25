@@ -1,3 +1,24 @@
-<button nz-button nzType="primary">
+<button nz-button (click)="openDrawer()" nzType="primary">
     <span>新建FaaSLevel</span>
 </button>
+
+<nz-drawer [nzMaskClosable]="false" [nzVisible]="drawerVisible" nzPlacement="top" nzTitle="新建FaaSLevel"
+    (nzOnClose)="onCancled()">
+
+    <form nz-form [formGroup]="createFaaSLevelForm" (ngSubmit)="onCreated()">
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" >id</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input type="text" class="form-control" formControlName="id" id="id">
+            </nz-form-control>
+        </nz-form-item >
+
+        <nz-form-item>
+            <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                <button nz-button nzType="primary" type="submit">
+                    新建
+                </button>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</nz-drawer>
