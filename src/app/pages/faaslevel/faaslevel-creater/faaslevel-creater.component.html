@@ -1,17 +1,26 @@
 <button nz-button (click)="openDrawer()" nzType="primary">
-    <span>新建FaaSLevel</span>
+    <span>新建 FaaS 规格
+    </span>
 </button>
 
-<nz-drawer [nzMaskClosable]="false" [nzVisible]="drawerVisible" nzPlacement="top" nzTitle="新建FaaSLevel"
+<nz-drawer [nzMaskClosable]="false" [nzVisible]="drawerVisible" nzPlacement="top" nzTitle="新建FaaS规格"
     (nzOnClose)="onCancled()">
 
-    <form nz-form [formGroup]="createFaaSLevelForm" (ngSubmit)="onCreated()">
+    <form nz-form [formGroup]="createFaaslevelForm" (ngSubmit)="onCreated()">
+
         <nz-form-item>
-            <nz-form-label [nzSpan]="6" >id</nz-form-label>
-            <nz-form-control [nzSpan]="14">
-                <input type="text" class="form-control" formControlName="id" id="id">
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>CPU 核心数</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+                <nz-input-number formControlName="cpu" [nzMin]="1" [nzMax]="16" [nzStep]="1"></nz-input-number>
             </nz-form-control>
-        </nz-form-item >
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>使用内存</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+                <nz-input-number formControlName="mem" [nzMin]="200" [nzMax]="10000" [nzStep]="100"></nz-input-number>
+            </nz-form-control>
+        </nz-form-item>
 
         <nz-form-item>
             <nz-form-control [nzSpan]="14" [nzOffset]="6">
@@ -20,5 +29,6 @@
                 </button>
             </nz-form-control>
         </nz-form-item>
+
     </form>
 </nz-drawer>

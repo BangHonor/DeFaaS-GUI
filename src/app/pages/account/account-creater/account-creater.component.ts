@@ -16,7 +16,7 @@ export class AccountCreaterComponent implements OnInit {
   drawerVisible: boolean = false;
   createAccountForm!: FormGroup;
 
-  @Output() created = new EventEmitter<Account>();
+  @Output() created = new EventEmitter<void>();
 
   constructor(
     private modal: NzModalService,
@@ -59,9 +59,10 @@ export class AccountCreaterComponent implements OnInit {
           let password: string = this.createAccountForm.get('password').value;
 
           this.accountService.createAccount(password).
-            subscribe(account => {
-              this.created.emit(account);  // 向父组件发出 created 事件
-            });
+            subscribe(
+              () => {
+                this.created.emit();  // 向父组件发出 created 事件
+              });
 
           resolve();
         })

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FaaSLevel, FaaslevelService } from '../../core/faaslevel/faaslevel.service'
+import { Faaslevel, FaaslevelService } from '../../core/faaslevel/faaslevel.service'
 
 
 @Component({
@@ -11,23 +11,26 @@ import { FaaSLevel, FaaslevelService } from '../../core/faaslevel/faaslevel.serv
 
 export class FaaslevelComponent implements OnInit {
 
-  listOfFaaSLevel: FaaSLevel[];
+  listOfFaaslevel: Faaslevel[];
 
-  constructor(private faaslevelService:FaaslevelService) { }
+  constructor(
+    private faaslevelService: FaaslevelService,
+  ) { }
 
   ngOnInit(): void {
-    this.reloadListOfFaaSLevel();
+    this.reloadListOfFaaslevel();
+
+    console.log(this.listOfFaaslevel);
   }
 
-  reloadListOfFaaSLevel(): void {
+  reloadListOfFaaslevel(): void {
 
-    this.faaslevelService.getListOfFaaSLevel().
-      subscribe(ListOfFaaSLevel => this.listOfFaaSLevel = [...ListOfFaaSLevel]);
+    this.faaslevelService.getListOfFaaslevel().
+      subscribe(listOfFaaslevel => this.listOfFaaslevel = [...listOfFaaslevel]);
 
-    console.log(this.listOfFaaSLevel);
   }
 
   onCreated(): void {
-    this.reloadListOfFaaSLevel();
+    this.reloadListOfFaaslevel();
   }
 }

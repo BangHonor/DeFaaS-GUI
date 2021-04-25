@@ -26,7 +26,7 @@ export class AccountComponent implements OnInit {
     this.accountService.getListOfAccount().
       subscribe(listOfAccount => this.listOfAccount = [...listOfAccount]);
 
-    console.log(this.listOfAccount);
+    // console.log(this.listOfAccount);
 
   }
 

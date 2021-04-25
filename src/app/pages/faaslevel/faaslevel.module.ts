@@ -15,10 +15,10 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
-import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzSliderModule } from 'ng-zorro-antd/slider';
 
 const USED_NZ_MOUDLES = [
   NzTableModule,
@@ -27,10 +27,10 @@ const USED_NZ_MOUDLES = [
   NzIconModule,
   NzModalModule,
   NzInputModule,
-  NzDescriptionsModule,
-  NzBadgeModule,
   NzDrawerModule,
   NzFormModule,
+  NzInputNumberModule,
+  NzSliderModule,
 ];
 
 

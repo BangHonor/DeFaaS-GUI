@@ -11,7 +11,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { WrapRes, ServiceErrorHandler } from '../wrap'
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
-export interface FaaSLevel {//FaaSLevel API
+export interface Faaslevel {//Faaslevel API
   id: string;
   cpu: string;
   mem: string;
@@ -22,52 +22,57 @@ export interface FaaSLevel {//FaaSLevel API
 })
 export class FaaslevelService extends ServiceErrorHandler {
 
-  faaslevels: Map<string, FaaSLevel>;
+  // id -> Faaslevel
+  // id is a string
+  faaslevels: Map<string, Faaslevel>;
 
-  constructor(private http: HttpClient,
-    private message: NzMessageService) {
+  constructor(
+    private http: HttpClient,
+    private message: NzMessageService,
+  ) {
 
     super()
-    this.loadFaasLevelsFromServer();
+    this.loadFaaslevelsFromServe();
   }
 
-  private loadFaasLevelsFromServer(): void {
+  private loadFaaslevelsFromServe(): void {
 
-    this.faaslevels =new Map();
+    this.faaslevels = new Map();
 
-    let one: FaaSLevel = {
+    let one: Faaslevel = {
       id: "0",
       cpu: "1",
       mem: "512",
     };
     this.faaslevels.set(one.id, one);
 
-    this.message.success('加载FaaSLevel数据成功');
+    this.message.success('加载FaaS规格数据成功');
   }
 
-  getListOfFaaSLevel(): Observable<FaaSLevel[]> {
+  getListOfFaaslevel(): Observable<Faaslevel[]> {
     return of([...this.faaslevels.values()]);
   }
 
-  createFaaSLevel(id:string): Observable<FaaSLevel> {
+  createFaaslevel(cpu: string, mem: string): Observable<Faaslevel> {
 
     // get a new account from server
-    let faaslevel: FaaSLevel = {
-      id: id,
-      cpu: "1",
-      mem: "512",
+    let faaslevel: Faaslevel = {
+      id: "" + this.faaslevels.size,
+      cpu: cpu,
+      mem: mem,
     };
+
     this.faaslevels.set(faaslevel.id, faaslevel);
-    
-    this.message.success('新建账户成功');
+
+    this.message.success('新建FaaS规格成功');
 
     return of(faaslevel);
   }
 
-  getFaaSLevel(id: string): Observable<FaaSLevel> {
+  getFaaslevel(id: string): Observable<Faaslevel> {
 
     if (!this.faaslevels.has(id)) {
-      this.message.error('faaslevel不存在');
+      this.message.error('FaaS 规格不存在');
       return undefined;
     }
 

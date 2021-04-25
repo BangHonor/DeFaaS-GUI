@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
-import { FaaSLevel, FaaslevelService } from '../../../core/faaslevel/faaslevel.service'
+import { Faaslevel, FaaslevelService } from '../../../core/faaslevel/faaslevel.service'
 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -12,59 +12,61 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class FaaslevelCreaterComponent implements OnInit {
 
-  createFaaSLevelForm!: FormGroup;
+  createFaaslevelForm!: FormGroup;
   drawerVisible: boolean = false;
 
-  @Output() created = new EventEmitter<FaaSLevel>();
-  
+  @Output() created = new EventEmitter<void>();
+
   constructor(
     private modal: NzModalService,
     private faaslevelService: FaaslevelService,
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.createFaaSLevelForm = this.formBuilder.group({
-      id: ['', [Validators.required]],
+    this.createFaaslevelForm = this.formBuilder.group({
+      cpu: ['', [Validators.required]],
+      mem: ['', [Validators.required]],
     });
   }
 
   resetForm(): void {
 
-    this.createFaaSLevelForm.reset();
+    this.createFaaslevelForm.reset();
 
-    for (const key in this.createFaaSLevelForm.controls) {
-      this.createFaaSLevelForm.controls[key].markAsPristine();
-      this.createFaaSLevelForm.controls[key].updateValueAndValidity();
+    for (const key in this.createFaaslevelForm.controls) {
+      this.createFaaslevelForm.controls[key].markAsPristine();
+      this.createFaaslevelForm.controls[key].updateValueAndValidity();
     }
 
   }
-  
+
   openDrawer(): void {
     this.resetForm();
     this.drawerVisible = true;
   }
 
-  onCreated():void {
+  onCreated(): void {
     this.modal.confirm({
 
-      nzTitle: '<i>新建一个FaaSLevel？</i>',
+      nzTitle: '<i>新建一个FaaS 规格？</i>',
       nzOnOk: () =>
         new Promise<void>((resolve, reject) => {
 
-          let id: string = this.createFaaSLevelForm.get('id').value;
+          let cpu: string = this.createFaaslevelForm.get('cpu').value;
+          let mem: string = this.createFaaslevelForm.get('mem').value;
 
-          this.faaslevelService.createFaaSLevel(id).
-            subscribe(id => {
-              this.created.emit(id);  // 向父组件发出 created 事件
-            });
-            console.log(id)
+          this.faaslevelService.createFaaslevel(cpu, mem).
+            subscribe(
+              () => {
+                this.created.emit();  // 向父组件发出 created 事件
+              });
 
           resolve();
         })
           .finally(() => {
-            for (const key in this.createFaaSLevelForm.controls) {
-              this.createFaaSLevelForm.controls[key].markAsPristine();
-              this.createFaaSLevelForm.controls[key].updateValueAndValidity();
+            for (const key in this.createFaaslevelForm.controls) {
+              this.createFaaslevelForm.controls[key].markAsPristine();
+              this.createFaaslevelForm.controls[key].updateValueAndValidity();
             }
           })
           .catch(error => console.log(error))
@@ -73,8 +75,9 @@ export class FaaslevelCreaterComponent implements OnInit {
 
     });
   }
-  
+
   onCancled(): void {
     this.drawerVisible = false;
   }
+
 }
