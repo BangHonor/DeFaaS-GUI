@@ -1,2 +1,6 @@
-<!-- <nz-code-editor class="editor" [ngModel]="code" [nzEditorOption]="{ 
-    language: 'typescript', theme:'vs-dark' }"></nz-code-editor> -->
+<button (click)="goBack()">
+    <span>返回</span>
+</button>
+
+<nz-code-editor class="editor" [ngModel]="funccode.code" [nzEditorOption]="editorOption">
+</nz-code-editor>

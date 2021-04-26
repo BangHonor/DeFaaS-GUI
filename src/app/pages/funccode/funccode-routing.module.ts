@@ -6,7 +6,7 @@ import { EditorComponent } from './editor/editor.component'
 
 const routes: Routes = [
   { path: '', component: FunccodeComponent },
-  { path: 'editor', component: EditorComponent },
+  { path: 'editor/:name', component: EditorComponent },
 ];
 
 @NgModule({

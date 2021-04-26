@@ -6,12 +6,25 @@
                     <tr>
                         <th>函数名称</th>
                         <th>语言</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let funccode of funccodeTable.data">
-                        <td>{{ funccode.name }}</td>
-                        <td>{{ funccode.language }}</td>
+                        <td> {{ funccode.name }} </td>
+                        <td> {{ funccode.language }} </td>
+                        <td>
+                            <button nz-button nzType="primary">
+                                <a routerLink="/funccode/editor/{{ funccode.name }}">
+                                    <i nz-icon nzType="form" nzTheme="outline"></i>
+                                    <span>编辑</span>
+                                </a>
+                            </button>
+                            <button nz-button nzType="primary" (click)="onDeleted(funccode.name)">
+                                <i nz-icon nzType="delete" nzTheme="outline"></i>
+                                <span>删除</span>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </nz-table>

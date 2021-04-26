@@ -9,12 +9,11 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 
 
 import { WrapRes, ServiceErrorHandler } from '../wrap'
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-
 
 export interface Funccode {//Faaslevel API
   name: string,
   language: string,
+  code: string,
 }
 
 
@@ -22,9 +21,12 @@ export interface Funccode {//Faaslevel API
   providedIn: 'root'
 })
 export class FunccodeService extends ServiceErrorHandler {
-  funccodes:Map<string,Funccode>;
 
-constructor(
+  // name -> Funccode
+  // name is a string
+  funccodes: Map<string, Funccode>;
+
+  constructor(
     private http: HttpClient,
     private message: NzMessageService,
   ) {
@@ -39,14 +41,28 @@ constructor(
 
     let one: Funccode = {
       name: "funccode name",
-      language: "funccode language"
+      language: "typescript",
+      code: "hello world!",
     };
+
     this.funccodes.set(one.name, one);
 
-    this.message.success('加载funccode数据成功');
+    this.message.success('加载函数代码数据成功');
   }
 
   getListOfFunccode(): Observable<Funccode[]> {
     return of([...this.funccodes.values()]);
+  }
+
+  getFunccode(name: string): Observable<Funccode> {
+
+    if (!this.funccodes.has(name)) {
+      this.message.error('函数代码不存在');
+      return undefined;
+    }
+
+    let funccode: Funccode = this.funccodes.get(name);
+
+    return of(funccode);
   }
 }

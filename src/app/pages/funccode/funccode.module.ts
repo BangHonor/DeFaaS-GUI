@@ -29,7 +29,8 @@ const USED_NZ_MOUDLES = [
   NzDrawerModule,
   NzFormModule,
   NzInputNumberModule,
-  NzSliderModule,
+  // NzSliderModule,
+  NzCodeEditorModule,
 ];
 
 
