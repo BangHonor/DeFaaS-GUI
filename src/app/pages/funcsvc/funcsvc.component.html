@@ -1,1 +1,20 @@
-<p>funcsvc works!</p>
+<div nz-row [nzGutter]="24" class="pt-lg">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+        <nz-card>
+            <nz-table #funcsvcTable [nzData]="listOfFuncsvc">
+                <thead>
+                    <tr>
+                        <th>函数名称</th>
+                        <th>语言</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let funcsvc of funcsvcTable.data">
+                        <td>{{ funcsvc.name }}</td>
+                        <td>{{ funcsvc.language }}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </nz-card>
+    </div>
+</div>
