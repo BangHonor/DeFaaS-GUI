@@ -6,6 +6,7 @@ import { FunccodeRoutingModule } from './funccode-routing.module';
 import { FunccodeComponent } from './funccode.component';
 import { EditorComponent } from './editor/editor.component';
 
+// https://ng.ant.design/experimental/code-editor/zh
 import { NzCodeEditorModule } from 'ng-zorro-antd/code-editor';
 
 const USED_NZ_MOUDLES = [
