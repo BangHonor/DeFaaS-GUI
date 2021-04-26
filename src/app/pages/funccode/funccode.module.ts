@@ -6,8 +6,6 @@ import { FunccodeRoutingModule } from './funccode-routing.module';
 import { FunccodeComponent } from './funccode.component';
 import { EditorComponent } from './editor/editor.component';
 
-// https://ng.ant.design/experimental/code-editor/zh
-import { NzCodeEditorModule } from 'ng-zorro-antd/code-editor';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -18,6 +16,9 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { NzCodeEditorModule } from 'ng-zorro-antd/code-editor';  // see: https://ng.ant.design/experimental/code-editor/zh
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 const USED_NZ_MOUDLES = [
   NzTableModule,
@@ -31,6 +32,8 @@ const USED_NZ_MOUDLES = [
   NzInputNumberModule,
   // NzSliderModule,
   NzCodeEditorModule,
+  // NzTabsModule,
+  NzTagModule,
 ];
 
 

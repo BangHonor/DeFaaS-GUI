@@ -2,5 +2,9 @@
     <span>返回</span>
 </button>
 
-<nz-code-editor class="editor" [ngModel]="funccode.code" [nzEditorOption]="editorOption">
+<br>
+
+<nz-tag> {{codeEditorTabs[0].tabName}} </nz-tag>
+
+<nz-code-editor class="editor" [ngModel]="codeEditorTabs[0].code" [nzEditorOption]="codeEditorTabs[0].codeEditorOption">
 </nz-code-editor>

@@ -10,10 +10,14 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { WrapRes, ServiceErrorHandler } from '../wrap'
 
-export interface Funccode {//Faaslevel API
+export interface Funccode {
   name: string,
-  language: string,
-  code: string,
+  tag: string,
+  files: {
+    filename: string,
+    language: string,
+    code: string,
+  }[],
 }
 
 
@@ -41,8 +45,14 @@ export class FunccodeService extends ServiceErrorHandler {
 
     let one: Funccode = {
       name: "funccode name",
-      language: "typescript",
-      code: "hello world!",
+      tag: "test",
+      files: [
+        {
+          filename: "handler.ts",
+          language: "typescript",
+          code: `// TODO`,
+        },
+      ],
     };
 
     this.funccodes.set(one.name, one);

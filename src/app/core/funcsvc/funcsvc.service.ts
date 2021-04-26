@@ -9,9 +9,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 
 
 import { WrapRes, ServiceErrorHandler } from '../wrap'
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
-export interface Funcsvc{
+export interface Funcsvc {
   name: string,
   language: string,
 }
@@ -22,7 +21,7 @@ export interface Funcsvc{
 
 export class FuncsvcService extends ServiceErrorHandler {
 
-  funcsvcs:Map<string,Funcsvc>;
+  funcsvcs: Map<string, Funcsvc>;
 
   constructor(
     private http: HttpClient,

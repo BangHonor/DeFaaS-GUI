@@ -7,6 +7,14 @@ import { Funccode, FunccodeService } from '../../../core/funccode/funccode.servi
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { EditorOptions } from 'ng-zorro-antd/code-editor';
 
+
+interface CodeEditorTab {
+  tabName: string;
+  code: string;
+  codeEditorOption: EditorOptions;  // see: https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.istandaloneeditorconstructionoptions.html
+}
+
+
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
@@ -15,23 +23,20 @@ import { EditorOptions } from 'ng-zorro-antd/code-editor';
 export class EditorComponent implements OnInit {
 
   funccode: Funccode;
-
-  // doc see:
-  // https://microsoft.github.io/monaco-editor/api/interfaces/monaco.editor.istandaloneeditorconstructionoptions.html
-  editorOption: EditorOptions = {
-    language: 'typescript',
-    theme: 'vs-dark',
-  };
+  codeEditorTabs: CodeEditorTab[];
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private funccodeService: FunccodeService,
-    // private modal: NzModalService,
+    private modal: NzModalService,
   ) { }
 
   ngOnInit(): void {
     this.reloadFunccode()
+
+    console.log(this.codeEditorTabs)
+
   }
 
   goBack(): void {
@@ -47,10 +52,21 @@ export class EditorComponent implements OnInit {
         this.funccode = funccode;
       });
 
-    this.editorOption = {
-      language: this.funccode.language,
-      theme: 'vs-dark',
-    }
-  }
+    this.codeEditorTabs = this.funccode.files.map<CodeEditorTab>(
+      file => {
 
+        let tab: CodeEditorTab = {
+          tabName: file.filename,
+          code: file.code,
+          codeEditorOption: {
+            language: file.language,
+            theme: 'vs-dark',
+          },
+        };
+
+        return tab;
+      });
+
+
+  }
 }
