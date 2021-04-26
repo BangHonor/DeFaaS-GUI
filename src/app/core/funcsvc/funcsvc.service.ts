@@ -11,42 +11,42 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { WrapRes, ServiceErrorHandler } from '../wrap'
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
-
-export interface Funccode {//Faaslevel API
+export interface Funcsvc{
   name: string,
   language: string,
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class FunccodeService extends ServiceErrorHandler {
-  funccodes:Map<string,Funccode>;
 
-constructor(
+export class FuncsvcService extends ServiceErrorHandler {
+
+  funcsvcs:Map<string,Funcsvc>;
+
+  constructor(
     private http: HttpClient,
     private message: NzMessageService,
   ) {
 
     super()
-    this.loadFunccodeFromServe();
+    this.loadFuncsvcFromServe();
   }
 
-  private loadFunccodeFromServe(): void {
+  private loadFuncsvcFromServe(): void {
 
-    this.funccodes = new Map();
+    this.funcsvcs = new Map();
 
-    let one: Funccode = {
+    let one: Funcsvc = {
       name: "funccode name",
       language: "funccode language"
     };
-    this.funccodes.set(one.name, one);
+    this.funcsvcs.set(one.name, one);
 
     this.message.success('加载funccode数据成功');
   }
 
-  getListOfFunccode(): Observable<Funccode[]> {
-    return of([...this.funccodes.values()]);
+  getListOfFuncsvc(): Observable<Funcsvc[]> {
+    return of([...this.funcsvcs.values()]);
   }
 }

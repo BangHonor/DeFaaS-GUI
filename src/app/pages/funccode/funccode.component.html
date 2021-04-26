@@ -1,1 +1,20 @@
-<p>funccode works!</p>
+<div nz-row [nzGutter]="24" class="pt-lg">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+        <nz-card>
+            <nz-table #funccodeTable [nzData]="listOfFunccode">
+                <thead>
+                    <tr>
+                        <th>函数名称</th>
+                        <th>语言</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let funccode of funccodeTable.data">
+                        <td>{{ funccode.name }}</td>
+                        <td>{{ funccode.language }}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </nz-card>
+    </div>
+</div>
