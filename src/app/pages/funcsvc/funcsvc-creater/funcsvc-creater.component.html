@@ -1,0 +1,58 @@
+<button (click)="goBack()">
+    <span>返回</span>
+</button>
+
+<div nz-row [nzGutter]="24" class="pt-lg">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+        <nz-card>
+            <form nz-form [formGroup]="createFuncsvcForm" (ngSubmit)="onCreated()">
+
+
+
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>账户地址</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <nz-select formControlName="accountAddress">
+
+                            <nz-option *ngFor="let accountAddress of loadListOfAccountAddress()"
+                                [nzValue]="accountAddress" [nzLabel]="accountAddress"></nz-option>
+
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>函数代码名</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <nz-select formControlName="funccodeName">
+
+                            <nz-option *ngFor="let funccodeName of loadListOfFunccodeName()" [nzValue]="funccodeName"
+                                [nzLabel]="funccodeName"></nz-option>
+
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>FaaS 规格ID</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <nz-select formControlName="faaslevelID">
+
+                            <nz-option *ngFor="let faaslevelID of loadListOfFaaslevelID()" [nzValue]="faaslevelID"
+                                [nzLabel]="faaslevelID"></nz-option>
+
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                        <button nz-button nzType="primary" type="submit">
+                            发起部署订单
+                        </button>
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+        </nz-card>
+    </div>
+</div>

@@ -16,8 +16,14 @@
                         <td>
                             <button nz-button nzType="primary">
                                 <a routerLink="/funccode/editor/{{ funccode.name }}">
-                                    <i nz-icon nzType="form" nzTheme="outline"></i>
+                                    <i nz-icon nzType="edit" nzTheme="outline"></i>
                                     <span>编辑</span>
+                                </a>
+                            </button>
+                            <button nz-button nzType="primary">
+                                <a routerLink="/funccode/detail/{{ funccode.name }}">
+                                    <i nz-icon nzType="form" nzTheme="outline"></i>
+                                    <span>详情</span>
                                 </a>
                             </button>
                             <button nz-button nzType="primary" (click)="onDeleted(funccode.name)">

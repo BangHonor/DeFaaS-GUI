@@ -1,15 +1,33 @@
 <div nz-row [nzGutter]="24" class="pt-lg">
     <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
         <nz-card>
+            <button nz-button nzType="primary">
+                <a routerLink="/funcsvc/create">
+                    <span>部署函数服务</span>
+                </a>
+            </button>
+        </nz-card>
+    </div>
+</div>
+
+<div nz-row [nzGutter]="24" class="pt-lg">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+        <nz-card>
             <nz-table #funcsvcTable [nzData]="listOfFuncsvc">
                 <thead>
                     <tr>
-                        <th>函数名称</th>
-                        <th>语言</th>
+                        <th>部署订单 ID</th>
+                        <th>函数代码名称</th>
+                        <th>部署订单状态</th>
+                        <th>访问地址</th>
+                        <th>访问密钥</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let funcsvc of funcsvcTable.data">
+                        <td>{{ funcsvc.name }}</td>
+                        <td>{{ funcsvc.name }}</td>
+                        <td>{{ funcsvc.name }}</td>
                         <td>{{ funcsvc.name }}</td>
                         <td>{{ funcsvc.language }}</td>
                     </tr>
