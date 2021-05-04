@@ -16,20 +16,29 @@
             <nz-table #funcsvcTable [nzData]="listOfFuncsvc">
                 <thead>
                     <tr>
+                        <th>函数服务名</th>
+                        <th>租户地址</th>
+                        <th>函数代码名</th>
                         <th>部署订单 ID</th>
-                        <th>函数代码名称</th>
                         <th>部署订单状态</th>
-                        <th>访问地址</th>
-                        <th>访问密钥</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let funcsvc of funcsvcTable.data">
                         <td>{{ funcsvc.name }}</td>
-                        <td>{{ funcsvc.name }}</td>
-                        <td>{{ funcsvc.name }}</td>
-                        <td>{{ funcsvc.name }}</td>
-                        <td>{{ funcsvc.language }}</td>
+                        <td>{{ funcsvc.accountAddress }}</td>
+                        <td>{{ funcsvc.funccodeName }}</td>
+                        <td>{{ funcsvc.deploymentOrderID }}</td>
+                        <td>{{ funcsvc.deploymentOrderState }}</td>
+                        <td>
+                            <button nz-button nzType="primary">
+                                <a routerLink="/funcsvc/detail/{{ funcsvc.name }}">
+                                    <i nz-icon nzType="form" nzTheme="outline"></i>
+                                    <span>详情</span>
+                                </a>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </nz-table>

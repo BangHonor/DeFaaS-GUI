@@ -44,18 +44,39 @@ export class FunccodeService extends ServiceErrorHandler {
     this.funccodes = new Map();
 
     let one: Funccode = {
-      name: "funccode name",
+      name: "hello-ts",
       tag: "test",
       files: [
         {
           filename: "handler.ts",
           language: "typescript",
-          code: `// TODO`,
+          code: `
+handler = function(request, response, context) {
+    let respBody: string = "Hello";
+    response.send(respBody);
+}`,
         },
       ],
     };
 
+    let two: Funccode = {
+      name: "hello-go",
+      tag: "test",
+      files: [
+        {
+          filename: "handler.go",
+          language: "go",
+          code: `
+func handler(w http.ResponseWriter, request *http.Request) {
+    w.Write("Hello");
+}`,
+        },
+      ],
+    };
+
+
     this.funccodes.set(one.name, one);
+    this.funccodes.set(two.name, two);
 
     this.message.success('加载函数代码数据成功');
   }

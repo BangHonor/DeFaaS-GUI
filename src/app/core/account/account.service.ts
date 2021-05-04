@@ -47,7 +47,7 @@ export class AccountService extends ServiceErrorHandler {
     this.accounts = new Map();
 
     let origin: Account = {
-      address: "0x000origin",
+      address: "0x00000000",
       password: "123456",
       balanceOf: "1",
       eth: "0",
@@ -56,7 +56,7 @@ export class AccountService extends ServiceErrorHandler {
       witnessReward: "0",
       isProvider: false,
       providerState: "offline",
-      otherInfo: "Haha",
+      otherInfo: "无",
     };
 
     this.accounts.set(origin.address, origin);
@@ -93,7 +93,7 @@ export class AccountService extends ServiceErrorHandler {
 
     // get a new account from server
     let account: Account = {
-      address: "0x000" + this.accounts.size,
+      address: "0x0000000" + this.accounts.size,
       password: password,
       balanceOf: "0",
       eth: "0",

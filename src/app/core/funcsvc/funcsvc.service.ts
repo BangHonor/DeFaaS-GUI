@@ -12,7 +12,15 @@ import { WrapRes, ServiceErrorHandler } from '../wrap'
 
 export interface Funcsvc {
   name: string,
-  language: string,
+  accountAddress: string,
+  funccodeName: string,
+  faaslevelID: string,
+  serviceDuration: string,
+  highestUnitPrice: string,
+  unitPrice: string,
+  serviceFee: string,
+  deploymentOrderID: string,
+  deploymentOrderState: string,
 }
 
 @Injectable({
@@ -37,10 +45,35 @@ export class FuncsvcService extends ServiceErrorHandler {
     this.funcsvcs = new Map();
 
     let one: Funcsvc = {
-      name: "funccode name",
-      language: "funccode language"
+      name: "test-service-1",
+      accountAddress: "0x00000000",
+      funccodeName: "hello-go",
+      faaslevelID: "0",
+      serviceDuration: "24",
+      highestUnitPrice: "",
+      unitPrice: "10",
+      serviceFee: "240",
+      deploymentOrderID: "0",
+      deploymentOrderState: "Bidding",
     };
+
+    let two: Funcsvc = {
+      name: "test-service-2",
+      accountAddress: "0x00000000",
+      funccodeName: "hello-ts",
+      faaslevelID: "1",
+      serviceDuration: "36",
+      highestUnitPrice: "",
+      unitPrice: "10",
+      serviceFee: "240",
+      deploymentOrderID: "1",
+      deploymentOrderState: "Confirming",
+    };
+
+
     this.funcsvcs.set(one.name, one);
+    this.funcsvcs.set(two.name, two);
+
 
     this.message.success('加载funccode数据成功');
   }

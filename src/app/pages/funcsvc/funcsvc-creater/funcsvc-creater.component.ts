@@ -20,6 +20,12 @@ export class FuncsvcCreaterComponent implements OnInit {
 
   createFuncsvcForm!: FormGroup;
 
+  formatterHour = (value: number) => `${value} 小时`;
+  parserHour = (value: string) => value.replace(' 小时', '');
+  formatterFaastoken = (value: number) => `${value} Token`;
+  parserFaastoken = (value: string) => value.replace(' Token', '');
+
+
   constructor(
     private location: Location,
     private modal: NzModalService,

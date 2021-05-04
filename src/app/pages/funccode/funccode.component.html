@@ -5,6 +5,7 @@
                 <thead>
                     <tr>
                         <th>函数名称</th>
+                        <th>语言</th>
                         <th>标签</th>
                         <th>操作</th>
                     </tr>
@@ -12,6 +13,7 @@
                 <tbody>
                     <tr *ngFor="let funccode of funccodeTable.data">
                         <td> {{ funccode.name }} </td>
+                        <td> {{ funccode.files[0].language }} </td>
                         <td> {{ funccode.tag }} </td>
                         <td>
                             <button nz-button nzType="primary">
