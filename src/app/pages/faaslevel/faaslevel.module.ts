@@ -19,6 +19,7 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 const USED_NZ_MOUDLES = [
   NzTableModule,
@@ -31,6 +32,7 @@ const USED_NZ_MOUDLES = [
   NzFormModule,
   NzInputNumberModule,
   NzSliderModule,
+  NzButtonModule,
 ];
 
 

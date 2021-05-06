@@ -19,6 +19,7 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzCodeEditorModule } from 'ng-zorro-antd/code-editor';  // see: https://ng.ant.design/experimental/code-editor/zh
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 const USED_NZ_MOUDLES = [
   NzTableModule,
@@ -34,6 +35,7 @@ const USED_NZ_MOUDLES = [
   NzCodeEditorModule,
   // NzTabsModule,
   NzTagModule,
+  NzButtonModule,
 ];
 
 

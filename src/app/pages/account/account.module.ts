@@ -19,6 +19,7 @@ import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 const USED_NZ_MOUDLES = [
   NzTableModule,
@@ -31,6 +32,7 @@ const USED_NZ_MOUDLES = [
   NzBadgeModule,
   NzDrawerModule,
   NzFormModule,
+  NzButtonModule,
 ];
 
 @NgModule({
