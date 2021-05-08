@@ -8,19 +8,20 @@
             <nz-descriptions nzTitle="详细信息" nzBordered>
 
 
-                <nz-descriptions-item nzTitle="账户地址">
+                <nz-descriptions-item nzTitle="账户地址" [nzSpan]="2">
                     {{account.address}}
                 </nz-descriptions-item>
-                <nz-descriptions-item nzTitle="密码" [nzSpan]="2">
+                <nz-descriptions-item nzTitle="密码">
                     {{account.password}}
                 </nz-descriptions-item>
 
-                <nz-descriptions-item nzTitle="ETH">
-                    {{account.eth}}
-                </nz-descriptions-item>
                 <nz-descriptions-item nzTitle="FaaS Token" [nzSpan]="2">
                     {{account.balanceOf}}
                 </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="ETH">
+                    {{account.eth}}
+                </nz-descriptions-item>
+
 
 
                 <nz-descriptions-item nzTitle="是否为证人">

@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { NzMessageService } from 'ng-zorro-antd/message';
+
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 
 import { WrapRes, ServiceErrorHandler } from '../wrap'
@@ -13,12 +14,12 @@ export interface Account {
   address: string;
   password: string;
   balanceOf: string;
-  eth?: string;
-  isWitness?: boolean;
-  witnessState?: string;
-  witnessReward?: string;
-  isProvider?: boolean;
-  providerState?: string;
+  eth: string;
+  isWitness: boolean;
+  witnessState: string;  // "online", "offline", "busy"
+  witnessReward: string;
+  isProvider: boolean;
+  providerState: string;  // "online", "offline"
   otherInfo?: string;
 }
 
@@ -36,10 +37,15 @@ export class AccountService extends ServiceErrorHandler {
 
   constructor(
     private http: HttpClient,
-    private message: NzMessageService) {
+    private notification: NzNotificationService) {
 
     super();
     this.loadAccountsFromServer();
+
+    this.http.get<WrapRes<any>>("/api/account/list")
+      .subscribe(
+        (res => console.log(res))
+      );
   }
 
   private loadAccountsFromServer(): void {
@@ -61,7 +67,7 @@ export class AccountService extends ServiceErrorHandler {
 
     this.accounts.set(origin.address, origin);
 
-    this.message.success('加载本地账户数据成功');
+    this.notification.success('success', '加载本地账户数据成功');
   }
 
   getListOfAccount(): Observable<Account[]> {
@@ -72,7 +78,7 @@ export class AccountService extends ServiceErrorHandler {
   getBalanceOf(address: string): Observable<string> {
 
     if (!this.accounts.has(address)) {
-      this.message.error('账户不存在');
+      this.notification.error('error', '账户不存在');
       return undefined;
     }
 
@@ -85,7 +91,7 @@ export class AccountService extends ServiceErrorHandler {
     account.balanceOf = newBalanceOf;
     this.accounts.set(address, account);
 
-    this.message.success('获取FaaS Token 余额成功');
+    this.notification.success('success', '获取FaaS Token 余额成功');
     return of(newBalanceOf);
   }
 
@@ -107,7 +113,7 @@ export class AccountService extends ServiceErrorHandler {
 
     this.accounts.set(account.address, account);
 
-    this.message.success('新建账户成功');
+    this.notification.success('success', '新建账户成功');
 
     return of(account);
   }
@@ -115,7 +121,7 @@ export class AccountService extends ServiceErrorHandler {
   getAccount(address: string): Observable<Account> {
 
     if (!this.accounts.has(address)) {
-      this.message.error('账户不存在');
+      this.notification.error('error', '账户不存在');
       return undefined;
     }
 
@@ -129,7 +135,7 @@ export class AccountService extends ServiceErrorHandler {
     account.isWitness = true;
     this.accounts.set(address, account);
 
-    this.message.success('注册证人成功');
+    this.notification.success('success', '注册证人成功');
   }
 
   witnessLogout(address: string): void {
@@ -138,7 +144,7 @@ export class AccountService extends ServiceErrorHandler {
     account.isWitness = false;
     this.accounts.set(address, account);
 
-    this.message.success('注销证人成功');
+    this.notification.success('success', '注销证人成功');
   }
 
   providerLogin(address: string): void {
@@ -147,7 +153,7 @@ export class AccountService extends ServiceErrorHandler {
     account.isProvider = true;
     this.accounts.set(address, account);
 
-    this.message.success('注册供应商成功');
+    this.notification.success('success', '注册供应商成功');
   }
 
   providerLogout(address: string): void {
@@ -156,7 +162,7 @@ export class AccountService extends ServiceErrorHandler {
     account.isProvider = false;
     this.accounts.set(address, account);
 
-    this.message.success('注销供应商成功');
+    this.notification.success('success', '注销供应商成功');
   }
 
   witnessOnline(address: string): void {
@@ -166,7 +172,7 @@ export class AccountService extends ServiceErrorHandler {
 
     this.accounts.set(address, account);
 
-    this.message.success('证人上线成功');
+    this.notification.success('success', '证人上线成功');
   }
 
   witnessOffline(address: string): void {
@@ -176,7 +182,7 @@ export class AccountService extends ServiceErrorHandler {
 
     this.accounts.set(address, account);
 
-    this.message.success('证人下线成功');
+    this.notification.success('success', '证人下线成功');
   }
 
   providerOnline(address: string): void {
@@ -186,7 +192,7 @@ export class AccountService extends ServiceErrorHandler {
 
     this.accounts.set(address, account);
 
-    this.message.success('供应商上线成功');
+    this.notification.success('success', '供应商上线成功');
   }
 
   providerOffline(address: string): void {
@@ -196,7 +202,7 @@ export class AccountService extends ServiceErrorHandler {
 
     this.accounts.set(address, account);
 
-    this.message.success('供应商下线成功');
+    this.notification.success('success', '供应商下线成功');
   }
 }
 

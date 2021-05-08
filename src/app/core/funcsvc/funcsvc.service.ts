@@ -5,8 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
-import { NzMessageService } from 'ng-zorro-antd/message';
-
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 import { WrapRes, ServiceErrorHandler } from '../wrap'
 
@@ -33,7 +32,7 @@ export class FuncsvcService extends ServiceErrorHandler {
 
   constructor(
     private http: HttpClient,
-    private message: NzMessageService,
+    private notification: NzNotificationService,
   ) {
 
     super()
@@ -75,7 +74,7 @@ export class FuncsvcService extends ServiceErrorHandler {
     this.funcsvcs.set(two.name, two);
 
 
-    this.message.success('加载funccode数据成功');
+    this.notification.success('success', '加载funccode数据成功');
   }
 
   getListOfFuncsvc(): Observable<Funcsvc[]> {

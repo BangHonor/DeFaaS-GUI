@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Faaslevel, FaaslevelService } from '../../core/faaslevel/faaslevel.service'
 
+// import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-faaslevel',
@@ -11,6 +12,7 @@ import { Faaslevel, FaaslevelService } from '../../core/faaslevel/faaslevel.serv
 
 export class FaaslevelComponent implements OnInit {
 
+  isLoading: boolean;
   listOfFaaslevel: Faaslevel[];
 
   constructor(
@@ -18,9 +20,18 @@ export class FaaslevelComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.reloadListOfFaaslevel();
 
-    console.log(this.listOfFaaslevel);
+    if (this.listOfFaaslevel == undefined) {
+
+      this.isLoading = true;
+
+      setTimeout(() => {
+        this.isLoading = false;
+        this.reloadListOfFaaslevel();
+      }, 800);
+
+    }
+
   }
 
   reloadListOfFaaslevel(): void {

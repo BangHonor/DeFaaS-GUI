@@ -5,8 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
-import { NzMessageService } from 'ng-zorro-antd/message';
-
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 import { WrapRes, ServiceErrorHandler } from '../wrap'
 
@@ -32,7 +31,7 @@ export class FunccodeService extends ServiceErrorHandler {
 
   constructor(
     private http: HttpClient,
-    private message: NzMessageService,
+    private notification: NzNotificationService,
   ) {
 
     super()
@@ -78,7 +77,7 @@ func handler(w http.ResponseWriter, request *http.Request) {
     this.funccodes.set(one.name, one);
     this.funccodes.set(two.name, two);
 
-    this.message.success('加载函数代码数据成功');
+    this.notification.success('success', '加载函数代码数据成功');
   }
 
   getListOfFunccode(): Observable<Funccode[]> {
@@ -88,7 +87,8 @@ func handler(w http.ResponseWriter, request *http.Request) {
   getFunccode(name: string): Observable<Funccode> {
 
     if (!this.funccodes.has(name)) {
-      this.message.error('函数代码不存在');
+
+      this.notification.error('error', '函数代码不存在');
       return undefined;
     }
 

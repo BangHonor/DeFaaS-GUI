@@ -35,6 +35,7 @@ const USED_NZ_MOUDLES = [
   NzButtonModule,
 ];
 
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ const USED_NZ_MOUDLES = [
     ReactiveFormsModule,
     FaaslevelRoutingModule,
     ...USED_NZ_MOUDLES,
+    NgxLoadingModule.forRoot({}),
   ]
 })
 export class FaaslevelModule { }

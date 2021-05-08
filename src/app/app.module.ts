@@ -11,10 +11,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { IconsProviderModule } from './icons-provider.module';
+
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzMessageModule } from 'ng-zorro-antd/message';
-import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+
+
+const USED_NZ_MOUDLES = [
+  NzLayoutModule,
+  NzMenuModule,
+  NzNotificationModule,
+];
+
 
 registerLocaleData(zh);
 
@@ -27,12 +35,9 @@ registerLocaleData(zh);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     IconsProviderModule,
-    NzLayoutModule,
-    NzMenuModule,
-    NzMessageModule,
-    NzButtonModule,
+    AppRoutingModule,
+    ...USED_NZ_MOUDLES,
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
