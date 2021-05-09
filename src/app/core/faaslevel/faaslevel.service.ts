@@ -8,15 +8,15 @@ import { catchError, retry } from 'rxjs/operators';
 
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
-
 import { WrapRes, ServiceErrorHandler } from '../wrap'
-import { stringify } from '@angular/compiler/src/util';
 
-export interface Faaslevel {//Faaslevel API
+export interface Faaslevel {
   id: string;
   cpu: string;
   mem: string;
-}
+};
+
+// export type WrapFaaslevel = WrapRes<Faaslevel>;
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

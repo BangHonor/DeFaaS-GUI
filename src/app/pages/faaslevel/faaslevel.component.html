@@ -1,7 +1,11 @@
 <div nz-row [nzGutter]="24" class="pt-lg">
     <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
         <nz-card>
-            <app-faaslevel-creater (created)="onCreated()"></app-faaslevel-creater>
+            <button nz-button nzType="primary">
+                <a routerLink="/faaslevel/create">
+                    <span>新建FaaS规格</span>
+                </a>
+            </button>
         </nz-card>
     </div>
 </div>
@@ -10,7 +14,6 @@
     <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
         <nz-card>
             <nz-spin [nzSpinning]="isLoading" [nzSize]="'large'">
-
                 <nz-table #faaslevelTable [nzData]="listOfFaaslevel">
                     <thead>
                         <tr>
@@ -29,10 +32,7 @@
                         </tr>
                     </tbody>
                 </nz-table>
-
             </nz-spin>
         </nz-card>
-
-
     </div>
 </div>

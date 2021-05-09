@@ -21,6 +21,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzResultModule } from 'ng-zorro-antd/result';
 
 const USED_NZ_MOUDLES = [
   NzTableModule,
@@ -34,7 +35,8 @@ const USED_NZ_MOUDLES = [
   NzInputNumberModule,
   NzSliderModule,
   NzButtonModule,
-  NzSpinModule
+  NzSpinModule,
+  NzResultModule
 ];
 
 

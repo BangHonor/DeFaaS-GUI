@@ -1,9 +1,11 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Location } from "@angular/common";
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { NzModalService } from 'ng-zorro-antd/modal';
 
 import { Faaslevel, FaaslevelService } from '../../../core/faaslevel/faaslevel.service'
 
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-faaslevel-creater',
@@ -13,23 +15,28 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class FaaslevelCreaterComponent implements OnInit {
 
   createFaaslevelForm!: FormGroup;
-  drawerVisible: boolean = false;
+  isResult: boolean;
 
-  @Output() created = new EventEmitter<void>();
+  formatterMB = (value: number) => `${value} MB`;
+  parserMB = (value: string) => value.replace(' MB', '');
+
+  // @Output() created = new EventEmitter<void>();
 
   constructor(
+    private location: Location,
     private modal: NzModalService,
     private faaslevelService: FaaslevelService,
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.isResult = false;
     this.createFaaslevelForm = this.formBuilder.group({
       cpu: ['', [Validators.required]],
       mem: ['', [Validators.required]],
     });
   }
 
-  resetForm(): void {
+  private resetForm(): void {
 
     this.createFaaslevelForm.reset();
 
@@ -40,9 +47,19 @@ export class FaaslevelCreaterComponent implements OnInit {
 
   }
 
-  openDrawer(): void {
-    this.resetForm();
-    this.drawerVisible = true;
+  goBack(): void {
+    this.location.back();
+  }
+
+  cancle(): void {
+
+    this.modal.warning({
+      nzTitle: '<i>是否离开页面？</i>',
+      nzContent: '<b>离开页面后输入的信息将丢失</b>',
+      nzOnOk: _ => { this.goBack() },
+      nzOnCancel: _ => { },
+    });
+
   }
 
   onCreated(): void {
@@ -58,7 +75,7 @@ export class FaaslevelCreaterComponent implements OnInit {
           this.faaslevelService.addFaaslevel({ "cpu": cpu, "mem": mem } as Faaslevel)
             .subscribe(
               _ => {
-                this.created.emit();  // 向父组件发出 created 事件
+                this.isResult = true;
               });
 
           resolve();
@@ -68,10 +85,6 @@ export class FaaslevelCreaterComponent implements OnInit {
       nzOnCancel: _ => { },
 
     });
-  }
-
-  onCancled(): void {
-    this.drawerVisible = false;
   }
 
 }
