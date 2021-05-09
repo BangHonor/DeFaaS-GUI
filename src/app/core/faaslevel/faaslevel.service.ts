@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+// import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -9,13 +10,17 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 
 import { WrapRes, ServiceErrorHandler } from '../wrap'
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { stringify } from '@angular/compiler/src/util';
 
 export interface Faaslevel {//Faaslevel API
   id: string;
   cpu: string;
   mem: string;
 }
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -40,31 +45,27 @@ export class FaaslevelService extends ServiceErrorHandler {
     this.http.get<WrapRes<Faaslevel[]>>("/api/faaslevel/list")
       .pipe(
         catchError(
-          this.handleError<WrapRes<Faaslevel[]>>('faaslevel service load', undefined)),
+          this.handleError<WrapRes<Faaslevel[]>>('loadFaaslevelsFromServer', undefined)),
       )
       .subscribe(
         res => {
 
           if (res == undefined) {
-            this.notification.error('加载FaaS规格数据失败', '');
+            this.notification.error('加载FaaS规格数据失败', '', { nzDuration: 0 });
+            return;
           }
 
           if (res.code != 0) {
-            console.log(res);
-            this.notification.error('加载FaaS规格数据失败', res.msg);
+            this.notification.error('加载FaaS规格数据失败', res.msg, { nzDuration: 0 });
             return;
           }
 
           let levels: Faaslevel[] = res.data;
-          this.faaslevels = new Map(levels.map(level => [level.id, level]));
+          this.faaslevels = new Map(levels.map(level => [level.id, level]));  // init
 
-          console.log("this.faaslevels", this.faaslevels);
-
-          this.notification.success('success', '加载FaaS规格数据成功');
+          this.notification.success('加载FaaS规格数据成功', '');
         }
       );
-
-
 
   }
 
@@ -72,26 +73,40 @@ export class FaaslevelService extends ServiceErrorHandler {
     return of([...this.faaslevels.values()]);
   }
 
-  createFaaslevel(cpu: string, mem: string): Observable<Faaslevel> {
+  addFaaslevel(level: Faaslevel): Observable<Faaslevel> {
 
-    // get a new account from server
-    let faaslevel: Faaslevel = {
-      id: "" + this.faaslevels.size,
-      cpu: cpu,
-      mem: mem,
-    };
+    let newLevel: Faaslevel;
 
-    this.faaslevels.set(faaslevel.id, faaslevel);
+    this.http.post<WrapRes<Faaslevel>>("/api/faaslevel/add", level, httpOptions)
+      .pipe(
+        catchError(this.handleError('addFaaslevel', undefined))
+      )
+      .subscribe(
+        res => {
+          if (!res) {
+            this.notification.error('添加FaaS规格失败', '', { nzDuration: 0 });
+            return;
+          }
 
-    this.notification.success('success', '新建FaaS规格成功');
+          if (res.code != 0) {
+            this.notification.error('添加FaaS规格失败', res.msg, { nzDuration: 0 });
+            return;
+          }
 
-    return of(faaslevel);
+          newLevel = res.data;
+          this.faaslevels.set(newLevel.id, newLevel);
+
+          this.notification.success('添加FaaS规格成功', '');
+        }
+      );
+
+    return of(newLevel);
   }
 
   getFaaslevel(id: string): Observable<Faaslevel> {
 
     if (!this.faaslevels.has(id)) {
-      this.notification.error('error', 'FaaS 规格不存在');
+      this.notification.error('FaaS 规格不存在', '');
       return undefined;
     }
 

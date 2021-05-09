@@ -41,11 +41,6 @@ export class AccountService extends ServiceErrorHandler {
 
     super();
     this.loadAccountsFromServer();
-
-    this.http.get<WrapRes<any>>("/api/account/list")
-      .subscribe(
-        (res => console.log(res))
-      );
   }
 
   private loadAccountsFromServer(): void {
@@ -64,6 +59,11 @@ export class AccountService extends ServiceErrorHandler {
       providerState: "offline",
       otherInfo: "无",
     };
+
+    // this.http.get<WrapRes<any>>("/api/account/list")
+    // .subscribe(
+    //   (res => console.log(res))
+    // );
 
     this.accounts.set(origin.address, origin);
 
@@ -207,24 +207,3 @@ export class AccountService extends ServiceErrorHandler {
 }
 
 
-
-// private handleError<T>(operation = 'operation', result?: T) {
-//   return (error: any): Observable<T> => {
-
-//     // TODO: send the error to remote logging infrastructure
-//     console.error(error); // log to console instead
-
-//     // TODO: better job of transforming error for user consumption
-//     console.warn(`${operation} failed: ${error.message}`);
-
-//     // Let the app keep running by returning an empty result.
-//     return of(result as T);
-//   };
-// }
-
-// getDistByDescription(description: string): Observable<DistMsg> {
-//   let distUrl: string = DISTURLS.get(description)!;
-//   return this.http.get<DistMsg>(distUrl).pipe(
-//     catchError(this.handleError<DistMsg>('AccidentAnalysisService.getDistByDescription', undefined)),
-//   );
-// }

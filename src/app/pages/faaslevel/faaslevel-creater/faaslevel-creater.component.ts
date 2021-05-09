@@ -55,23 +55,17 @@ export class FaaslevelCreaterComponent implements OnInit {
           let cpu: string = this.createFaaslevelForm.get('cpu').value;
           let mem: string = this.createFaaslevelForm.get('mem').value;
 
-          this.faaslevelService.createFaaslevel(cpu, mem).
-            subscribe(
-              () => {
+          this.faaslevelService.addFaaslevel({ "cpu": cpu, "mem": mem } as Faaslevel)
+            .subscribe(
+              _ => {
                 this.created.emit();  // 向父组件发出 created 事件
               });
 
           resolve();
         })
-          .finally(() => {
-            for (const key in this.createFaaslevelForm.controls) {
-              this.createFaaslevelForm.controls[key].markAsPristine();
-              this.createFaaslevelForm.controls[key].updateValueAndValidity();
-            }
-          })
           .catch(error => console.log(error))
       ,
-      nzOnCancel: () => { },
+      nzOnCancel: _ => { },
 
     });
   }

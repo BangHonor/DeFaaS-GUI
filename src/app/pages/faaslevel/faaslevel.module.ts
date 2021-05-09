@@ -20,6 +20,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 const USED_NZ_MOUDLES = [
   NzTableModule,
@@ -33,9 +34,9 @@ const USED_NZ_MOUDLES = [
   NzInputNumberModule,
   NzSliderModule,
   NzButtonModule,
+  NzSpinModule
 ];
 
-import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,6 @@ import { NgxLoadingModule } from 'ngx-loading';
     ReactiveFormsModule,
     FaaslevelRoutingModule,
     ...USED_NZ_MOUDLES,
-    NgxLoadingModule.forRoot({}),
   ]
 })
 export class FaaslevelModule { }

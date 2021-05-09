@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { Faaslevel, FaaslevelService } from '../../core/faaslevel/faaslevel.service'
 
-// import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-faaslevel',
@@ -21,6 +20,8 @@ export class FaaslevelComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // 不是异步等待后端数据
+    // 仅是延时加载数据
     if (this.listOfFaaslevel == undefined) {
 
       this.isLoading = true;
@@ -28,7 +29,7 @@ export class FaaslevelComponent implements OnInit {
       setTimeout(() => {
         this.isLoading = false;
         this.reloadListOfFaaslevel();
-      }, 800);
+      }, 1000);
 
     }
 
