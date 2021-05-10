@@ -16,8 +16,6 @@ export interface Faaslevel {
   mem: string;
 };
 
-// export type WrapFaaslevel = WrapRes<Faaslevel>;
-
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };

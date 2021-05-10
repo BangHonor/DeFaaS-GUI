@@ -1,8 +1,11 @@
 <div nz-row [nzGutter]="24" class="pt-lg">
     <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
         <nz-card>
-            <app-account-creater (created)="onCreated()">
-            </app-account-creater>
+            <button nz-button nzType="primary">
+                <a routerLink="/account/create">
+                    <span>新建本地账户</span>
+                </a>
+            </button>
         </nz-card>
     </div>
 </div>
@@ -10,39 +13,41 @@
 <div nz-row [nzGutter]="24" class="pt-lg">
     <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
         <nz-card>
-            <nz-table #accountTable [nzData]="listOfAccount">
-                <thead>
-                    <tr>
-                        <th>序号</th>
-                        <th>账户地址</th>
-                        <th>密码</th>
-                        <th>FaaS Token 余额</th>
-                        <th>详情</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let account of accountTable.data, let i = index">
-                        <td>{{ i+1 }}</td>
-                        <td>{{ account.address }}</td>
-                        <td>{{ account.password }}</td>
-                        <td>
-                            {{ account.balanceOf }}
-                            <button nz-button nzType="primary" (click)="onRefreshBalanceOf(i)">
-                                <i nz-icon nzType="sync" nzTheme="outline"></i>
-                                <span>刷新</span>
-                            </button>
-                        </td>
-                        <td>
-                            <button nz-button nzType="primary">
-                                <a routerLink="/account/detail/{{account.address}}">
-                                    <i nz-icon nzType="form" nzTheme="outline"></i>
-                                    <span>操作</span>
-                                </a>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </nz-table>
+            <nz-spin [nzSpinning]="isLoading" [nzSize]="'large'">
+                <nz-table #accountTable [nzData]="listOfAccount">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>账户地址</th>
+                            <th>密码</th>
+                            <th>FaaS Token 余额</th>
+                            <th>详情</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let account of accountTable.data, let i = index">
+                            <td>{{ i+1 }}</td>
+                            <td>{{ account.address }}</td>
+                            <td>{{ account.password }}</td>
+                            <td>
+                                {{ account.balanceOf }}
+                                <button nz-button nzType="primary" (click)="onRefreshBalanceOf(i)">
+                                    <i nz-icon nzType="sync" nzTheme="outline"></i>
+                                    <span>刷新</span>
+                                </button>
+                            </td>
+                            <td>
+                                <button nz-button nzType="primary">
+                                    <a routerLink="/account/detail/{{account.address}}">
+                                        <i nz-icon nzType="form" nzTheme="outline"></i>
+                                        <span>操作</span>
+                                    </a>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </nz-spin>
         </nz-card>
     </div>
 </div>

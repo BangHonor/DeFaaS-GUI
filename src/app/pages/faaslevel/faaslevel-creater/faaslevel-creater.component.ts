@@ -20,7 +20,6 @@ export class FaaslevelCreaterComponent implements OnInit {
   formatterMB = (value: number) => `${value} MB`;
   parserMB = (value: string) => value.replace(' MB', '');
 
-  // @Output() created = new EventEmitter<void>();
 
   constructor(
     private location: Location,

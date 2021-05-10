@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Location } from "@angular/common";
 import { NzModalService } from 'ng-zorro-antd/modal';
 
 import { Account, AccountService } from '../../../core/account/account.service'
@@ -13,25 +14,23 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class AccountCreaterComponent implements OnInit {
 
   passwordVisible: boolean = false;
-  drawerVisible: boolean = false;
+  isResult: boolean;
   createAccountForm!: FormGroup;
 
-  @Output() created = new EventEmitter<void>();
-
   constructor(
+    private location: Location,
     private modal: NzModalService,
     private accountService: AccountService,
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-
+    this.isResult = false;
     this.createAccountForm = this.formBuilder.group({
       password: [null, [Validators.required]],
     });
-
   }
 
-  resetForm(): void {
+  private resetForm(): void {
 
     this.createAccountForm.reset();
 
@@ -42,9 +41,19 @@ export class AccountCreaterComponent implements OnInit {
 
   }
 
-  openDrawer(): void {
-    this.resetForm();
-    this.drawerVisible = true;
+  goBack(): void {
+    this.location.back();
+  }
+
+  cancle(): void {
+
+    this.modal.warning({
+      nzTitle: '<i>是否离开页面？</i>',
+      nzContent: '<b>离开页面后输入的信息将丢失</b>',
+      nzOnOk: _ => { this.goBack() },
+      nzOnCancel: _ => { },
+    });
+
   }
 
   onCreated(): void {
@@ -53,35 +62,23 @@ export class AccountCreaterComponent implements OnInit {
 
       nzTitle: '<i>新建一个本地账户？</i>',
       nzContent: '<b>新账户的密码将是当前密码框中的密码</b>',
-      nzOnOk: () =>
+      nzOnOk: _ =>
         new Promise<void>((resolve, reject) => {
 
           let password: string = this.createAccountForm.get('password').value;
 
           this.accountService.createAccount(password).
             subscribe(
-              () => {
-                this.created.emit();  // 向父组件发出 created 事件
+              _ => {
+                this.isResult = true;
               });
 
           resolve();
         })
-          .finally(() => {
-            for (const key in this.createAccountForm.controls) {
-              this.createAccountForm.controls[key].markAsPristine();
-              this.createAccountForm.controls[key].updateValueAndValidity();
-            }
-            this.drawerVisible = false;
-          })
           .catch(error => console.log(error))
       ,
-      nzOnCancel: () => { },
+      nzOnCancel: _ => { },
 
     });
   }
-
-  onCancled(): void {
-    this.drawerVisible = false;
-  }
-
 }

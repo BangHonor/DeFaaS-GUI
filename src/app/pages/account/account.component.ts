@@ -9,16 +9,29 @@ import { Account, AccountService } from '../../core/account/account.service'
 })
 export class AccountComponent implements OnInit {
 
-  listOfAccount: Account[] = [];
+  isLoading: boolean;
+  listOfAccount: Account[];
 
-  newAccountModalIsVisible: boolean = false;
 
   constructor(
     private accountService: AccountService
   ) { }
 
   ngOnInit(): void {
-    this.reloadListOfAccount();
+
+    // 不是异步等待后端数据
+    // 仅是延时加载数据
+    if (this.listOfAccount == undefined) {
+
+      this.isLoading = true;
+
+      setTimeout(() => {
+        this.isLoading = false;
+        this.reloadListOfAccount();
+
+      }, 1000);
+
+    }
   }
 
   reloadListOfAccount(): void {
@@ -26,14 +39,11 @@ export class AccountComponent implements OnInit {
     this.accountService.getListOfAccount().
       subscribe(listOfAccount => this.listOfAccount = [...listOfAccount]);
 
-    // console.log(this.listOfAccount);
-
   }
 
   onRefreshBalanceOf(id: number) {
     this.accountService.getBalanceOf(this.listOfAccount[id].address).
       subscribe(newBalanceOf => this.listOfAccount[id].balanceOf = newBalanceOf);
-    // this.reloadListOfAccount();
   }
 
   onCreated(): void {

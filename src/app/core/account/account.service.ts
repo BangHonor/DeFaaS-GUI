@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
-
 import { WrapRes, ServiceErrorHandler } from '../wrap'
+
 
 export interface Account {
   address: string;
@@ -22,6 +22,12 @@ export interface Account {
   providerState: string;  // "online", "offline"
   otherInfo?: string;
 }
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 
 
 @Injectable({
@@ -45,29 +51,30 @@ export class AccountService extends ServiceErrorHandler {
 
   private loadAccountsFromServer(): void {
 
-    this.accounts = new Map();
+    this.http.get<WrapRes<Account[]>>("api/account/list")
+      .pipe(
+        catchError(
+          this.handleError<WrapRes<Account[]>>('loadAccountsFromServer', undefined)),
+      )
+      .subscribe(
+        res => {
 
-    let origin: Account = {
-      address: "0x00000000",
-      password: "123456",
-      balanceOf: "1",
-      eth: "0",
-      isWitness: false,
-      witnessState: "offline",
-      witnessReward: "0",
-      isProvider: false,
-      providerState: "offline",
-      otherInfo: "无",
-    };
+          if (res == undefined) {
+            this.notification.error('加载本地账户数据失败', '', { nzDuration: 0 });
+            return;
+          }
 
-    // this.http.get<WrapRes<any>>("/api/account/list")
-    // .subscribe(
-    //   (res => console.log(res))
-    // );
+          if (res.code != 0) {
+            this.notification.error('加载本地账户数据失败', res.msg, { nzDuration: 0 });
+            return;
+          }
 
-    this.accounts.set(origin.address, origin);
+          let accounts: Account[] = res.data;
+          this.accounts = new Map(accounts.map(account => [account.address, account]));  // init
 
-    this.notification.success('success', '加载本地账户数据成功');
+          this.notification.success('加载本地账户数据成功', '');
+        }
+      );
   }
 
   getListOfAccount(): Observable<Account[]> {
@@ -84,6 +91,7 @@ export class AccountService extends ServiceErrorHandler {
 
     let account: Account = this.accounts.get(address);
 
+    // TODO
     // 从服务端取数据
     let newBalanceOf: string = account.balanceOf + "6";
 
@@ -97,25 +105,32 @@ export class AccountService extends ServiceErrorHandler {
 
   createAccount(password: string): Observable<Account> {
 
-    // get a new account from server
-    let account: Account = {
-      address: "0x0000000" + this.accounts.size,
-      password: password,
-      balanceOf: "0",
-      eth: "0",
-      isWitness: false,
-      witnessState: "offline",
-      witnessReward: "0",
-      isProvider: false,
-      providerState: "offline",
-      otherInfo: "Haha",
-    };
+    let newAccount: Account;
 
-    this.accounts.set(account.address, account);
+    this.http.post<WrapRes<Account>>("/api/account/create", { "password": password }, httpOptions)
+      .pipe(
+        catchError(this.handleError('createAccount', undefined))
+      )
+      .subscribe(
+        res => {
+          if (!res) {
+            this.notification.error('新建本地账户失败', '', { nzDuration: 0 });
+            return;
+          }
 
-    this.notification.success('success', '新建账户成功');
+          if (res.code != 0) {
+            this.notification.error('新建本地账户失败', res.msg, { nzDuration: 0 });
+            return;
+          }
 
-    return of(account);
+          newAccount = res.data;
+          this.accounts.set(newAccount.address, newAccount);
+
+          this.notification.success('新建本地账户成功', '');
+        }
+      );
+
+    return of(newAccount);
   }
 
   getAccount(address: string): Observable<Account> {
