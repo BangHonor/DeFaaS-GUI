@@ -65,7 +65,7 @@ export class AccountCreaterComponent implements OnInit {
       nzOnOk: _ =>
         new Promise<void>((resolve, reject) => {
 
-          let password: string = this.createAccountForm.get('password').value;
+          let password: string = this.createAccountForm.get('password').value as string;
 
           this.accountService.createAccount(password).
             subscribe(

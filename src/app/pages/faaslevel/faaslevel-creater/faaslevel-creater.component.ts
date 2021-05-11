@@ -31,7 +31,7 @@ export class FaaslevelCreaterComponent implements OnInit {
     this.isResult = false;
     this.createFaaslevelForm = this.formBuilder.group({
       cpu: ['', [Validators.required]],
-      mem: ['', [Validators.required]],
+      mem: ['0', [Validators.required]],
     });
   }
 
@@ -68,8 +68,8 @@ export class FaaslevelCreaterComponent implements OnInit {
       nzOnOk: () =>
         new Promise<void>((resolve, reject) => {
 
-          let cpu: string = this.createFaaslevelForm.get('cpu').value;
-          let mem: string = this.createFaaslevelForm.get('mem').value;
+          let cpu: string = this.createFaaslevelForm.get('cpu').value as string;
+          let mem: string = this.createFaaslevelForm.get('mem').value as string;
 
           this.faaslevelService.addFaaslevel({ "cpu": cpu, "mem": mem } as Faaslevel)
             .subscribe(
@@ -86,4 +86,8 @@ export class FaaslevelCreaterComponent implements OnInit {
     });
   }
 
+
+  get cpu() { return this.createFaaslevelForm.get('cpu'); }
+
+  get mem() { return this.createFaaslevelForm.get('mem'); }
 }

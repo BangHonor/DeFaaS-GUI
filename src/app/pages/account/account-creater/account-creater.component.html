@@ -25,7 +25,7 @@
 
                 <nz-form-item>
                     <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                        <button nz-button nzType="primary" type="submit">
+                        <button nz-button nzType="primary" type="submit" [disabled]="!createAccountForm.valid">
                             新建
                         </button>
                     </nz-form-control>

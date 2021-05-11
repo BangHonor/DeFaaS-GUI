@@ -13,6 +13,13 @@
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>CPU 核心数</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
                         <nz-input-number formControlName="cpu" [nzMin]="1" [nzMax]="16" [nzStep]="1"></nz-input-number>
+
+                        <div *ngIf="cpu.invalid && (cpu.dirty || cpu.touched)">
+                            <div *ngIf="cpu.errors.required">
+                                请输入
+                            </div>
+                        </div>
+
                     </nz-form-control>
                 </nz-form-item>
 
@@ -22,12 +29,18 @@
                         <nz-input-number formControlName="mem" [nzMin]="200" [nzMax]="10000" [nzStep]="100"
                             [nzFormatter]="formatterMB" [nzParser]="parserMB">
                         </nz-input-number>
+
+                        <div *ngIf="mem.invalid && (mem.dirty || mem.touched)">
+                            <div *ngIf="mem.errors.required">
+                                请输入
+                            </div>
+                        </div>
                     </nz-form-control>
                 </nz-form-item>
 
                 <nz-form-item>
                     <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                        <button nz-button nzType="primary" type="submit">
+                        <button nz-button nzType="primary" type="submit" [disabled]="!createFaaslevelForm.valid">
                             新建
                         </button>
                     </nz-form-control>
