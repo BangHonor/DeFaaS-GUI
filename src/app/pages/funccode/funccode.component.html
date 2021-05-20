@@ -1,6 +1,18 @@
 <div nz-row [nzGutter]="24" class="pt-lg">
     <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
         <nz-card>
+            <button nz-button nzType="primary">
+                <a routerLink="/funccode/create">
+                    <span>新建函数</span>
+                </a>
+            </button>
+        </nz-card>
+    </div>
+</div>
+
+<div nz-row [nzGutter]="24" class="pt-lg">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+        <nz-card>
             <nz-table #funccodeTable [nzData]="listOfFunccode">
                 <thead>
                     <tr>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -19,6 +19,9 @@ export interface Funccode {
   }[],
 }
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -35,49 +38,65 @@ export class FunccodeService extends ServiceErrorHandler {
   ) {
 
     super()
-    this.loadFunccodeFromServe();
+    this.loadFunccodeFromServer();
   }
 
-  private loadFunccodeFromServe(): void {
+  private loadFunccodeFromServer(): void {
+    this.http.get<WrapRes<Funccode[]>>("/api/funccode/list")
+    .pipe(
+      catchError(
+        this.handleError<WrapRes<Funccode[]>>('loadFunccodeFromServer', undefined)),
+    )
+    .subscribe(
+      res => {
+        console.log(res.data)//没问题
 
-    this.funccodes = new Map();
+        if (res == undefined) {
+          this.notification.error('加载函数数据失败', '', { nzDuration: 0 });
+          return;
+        }
 
-    let one: Funccode = {
-      name: "hello-ts",
-      tag: "test",
-      files: [
-        {
-          filename: "handler.ts",
-          language: "typescript",
-          code: `
-handler = function(request, response, context) {
-    let respBody: string = "Hello";
-    response.send(respBody);
-}`,
-        },
-      ],
-    };
+        if (res.code != 0) {
+          this.notification.error('加载函数数据失败', res.msg, { nzDuration: 0 });
+          return;
+        }
 
-    let two: Funccode = {
-      name: "hello-go",
-      tag: "test",
-      files: [
-        {
-          filename: "handler.go",
-          language: "go",
-          code: `
-func handler(w http.ResponseWriter, request *http.Request) {
-    w.Write("Hello");
-}`,
-        },
-      ],
-    };
+        let levels: Funccode[] = res.data;
+        this.funccodes = new Map(levels.map(level => [level.name, level]));  // init
+        console.log(this.funccodes)//没问题
+        this.notification.success('加载函数数据成功', '');
+      }
+    );
+  }
 
+  addFunccode(level: Funccode): Observable<Funccode> {
 
-    this.funccodes.set(one.name, one);
-    this.funccodes.set(two.name, two);
+    let newLevel: Funccode;
 
-    this.notification.success('success', '加载函数代码数据成功');
+    this.http.post<WrapRes<Funccode>>("/api/Funccode/add", level, httpOptions)
+      .pipe(
+        catchError(this.handleError('addFunccode', undefined))
+      )
+      .subscribe(
+        res => {
+          if (!res) {
+            this.notification.error('添加Funccode失败', '', { nzDuration: 0 });
+            return;
+          }
+
+          if (res.code != 0) {
+            this.notification.error('添加Funccode失败', res.msg, { nzDuration: 0 });
+            return;
+          }
+
+          newLevel = res.data;
+          this.funccodes.set(newLevel.name, newLevel);
+
+          this.notification.success('添加Funccode成功', '');
+        }
+      );
+
+    return of(newLevel);
   }
 
   getListOfFunccode(): Observable<Funccode[]> {

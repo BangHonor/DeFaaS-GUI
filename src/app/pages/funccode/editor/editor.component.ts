@@ -66,7 +66,5 @@ export class EditorComponent implements OnInit {
 
         return tab;
       });
-
-
   }
 }

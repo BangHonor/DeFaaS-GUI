@@ -11,7 +11,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
   styleUrls: ['./funccode.component.less']
 })
 export class FunccodeComponent implements OnInit {
-
+  isLoading: boolean;
   listOfFunccode: Funccode[];
   constructor(
     private funccodeService: FunccodeService,
@@ -19,7 +19,17 @@ export class FunccodeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.reloadListOfFunccode();
+    if (this.listOfFunccode == undefined) {
+
+      this.isLoading = true;
+
+      setTimeout(() => {
+        this.isLoading = false;
+        this.reloadListOfFunccode();
+      }, 10000);
+
+    }
+
   }
 
   reloadListOfFunccode(): void {
@@ -27,6 +37,10 @@ export class FunccodeComponent implements OnInit {
     this.funccodeService.getListOfFunccode().
       subscribe(listOfFunccode => this.listOfFunccode = [...listOfFunccode]);
 
+  }
+
+  onCreated(): void {
+    this.reloadListOfFunccode();
   }
 
   onDeleted(name: string) {

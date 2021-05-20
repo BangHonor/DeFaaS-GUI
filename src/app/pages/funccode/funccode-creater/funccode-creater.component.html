@@ -1,0 +1,107 @@
+<div nz-row [nzGutter]="24" class="pt-lg">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+
+        <nz-card *ngIf="!isResult">
+
+            <button nz-button nzType="primary" (click)="cancle()">
+                <span>取消</span>
+            </button>
+
+            <form nz-form [formGroup]="createFunccodeForm" (ngSubmit)="onCreated()">
+
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>函数名称</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <div>
+                            <textarea
+                              nz-input
+                              placeholder="输入函数名称"
+                              formControlName="name"
+                              [nzAutosize]="{ minRows: 1, maxRows: 1 }"
+                            ></textarea>
+                          </div>
+                    </nz-form-control>
+                </nz-form-item>
+                
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>函数标签</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <div>
+                            <textarea
+                              nz-input
+                              placeholder="输入函数标签"
+                              formControlName="tag"
+                              [nzAutosize]="{ minRows: 1, maxRows: 1 }"
+                            ></textarea>
+                          </div>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>文件名称</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <div>
+                            <textarea
+                              nz-input
+                              placeholder="输入文件名称"
+                              formControlName="filename"
+                              [nzAutosize]="{ minRows: 1, maxRows: 1 }"
+                            ></textarea>
+                          </div>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>函数语言</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <div>
+                            <textarea
+                              nz-input
+                              placeholder="输入函数语言"
+                              formControlName="language"
+                              [nzAutosize]="{ minRows: 1, maxRows: 1 }"
+                            ></textarea>
+                          </div>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>函数代码</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <div>
+                            <textarea
+                              nz-input
+                              placeholder="输入函数代码"
+                              formControlName="code"
+                              [nzAutosize]="{ minRows: 2,maxRows: 10}"
+                            ></textarea>
+                          </div>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                        <button nz-button nzType="primary" type="submit">
+                            新建
+                        </button>
+                    </nz-form-control>
+                </nz-form-item>
+
+            </form>
+
+        </nz-card>
+    </div>
+</div>
+
+
+<div nz-row [nzGutter]="24" class="pt-lg">
+    <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
+        <nz-card *ngIf="isResult">
+            <nz-result nzStatus="info" nzTitle="新建 FaaS 规格" nzSubTitle="">
+                <div nz-result-extra>
+                    <button nz-button nzType="primary" (click)="goBack()">返回</button>
+                </div>
+            </nz-result>
+        </nz-card>
+    </div>
+</div>

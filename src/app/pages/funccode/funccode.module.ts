@@ -20,6 +20,7 @@ import { NzCodeEditorModule } from 'ng-zorro-antd/code-editor';  // see: https:/
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { FunccodeCreaterComponent } from './funccode-creater/funccode-creater.component';
 
 const USED_NZ_MOUDLES = [
   NzTableModule,
@@ -42,7 +43,8 @@ const USED_NZ_MOUDLES = [
 @NgModule({
   declarations: [
     FunccodeComponent,
-    EditorComponent
+    EditorComponent,
+    FunccodeCreaterComponent
   ],
   imports: [
     CommonModule,
