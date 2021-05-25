@@ -76,7 +76,7 @@ export class FunccodeCreaterComponent implements OnInit {
           let code: string = this.createFunccodeForm.get('code').value as string;
 
           
-          this.funccodeService.addFunccode({ name: name,tag:tag,files:[{filename:filename,language:language,code:code}]} as Funccode)
+          this.funccodeService.addFunccode({ name: name,tag:tag,Files:[{filename:filename,language:language,code:code}]} as Funccode)
             .subscribe(
               _ => {
                 this.isResult = true;

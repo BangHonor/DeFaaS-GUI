@@ -12,7 +12,7 @@ import { WrapRes, ServiceErrorHandler } from '../wrap'
 export interface Funccode {
   name: string,
   tag: string,
-  files: {
+  Files: {
     filename: string,
     language: string,
     code: string,
@@ -62,7 +62,7 @@ export class FunccodeService extends ServiceErrorHandler {
         }
 
         let levels: Funccode[] = res.data;
-
+        console.log(levels)
         this.funccodes = new Map(levels.map(level => [level.name, level]));  // init
         console.log(this.funccodes)//没问题
         this.notification.success('加载函数数据成功', '');

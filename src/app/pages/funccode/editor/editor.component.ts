@@ -51,10 +51,11 @@ export class EditorComponent implements OnInit {
       subscribe(funccode => {
         this.funccode = funccode;
       });
-
-    this.codeEditorTabs = this.funccode.files.map<CodeEditorTab>(
+    console.log(this.funccode)
+      
+    this.codeEditorTabs = this.funccode.Files.map<CodeEditorTab>(
       file => {
-
+        console.log(file)
         let tab: CodeEditorTab = {
           tabName: file.filename,
           code: file.code,
@@ -66,5 +67,15 @@ export class EditorComponent implements OnInit {
 
         return tab;
       });
+    
+  //   for(var i = 0;i<this.funccode.files.length;i++) {
+  //     this.codeEditorTabs[i].tabName=this.funccode.files[i].filename
+  //     this.codeEditorTabs[i].code=this.funccode.files[i].code
+  //     this.codeEditorTabs[i].codeEditorOption={
+  //                language: this.funccode.files[i].language,
+  //                theme: 'vs-dark',
+  //              }
+  //  }
+
   }
 }
