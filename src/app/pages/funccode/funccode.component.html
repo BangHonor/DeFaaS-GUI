@@ -13,41 +13,43 @@
 <div nz-row [nzGutter]="24" class="pt-lg">
     <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="24">
         <nz-card>
-            <nz-table #funccodeTable [nzData]="listOfFunccode">
-                <thead>
-                    <tr>
-                        <th>函数名称</th>
-                        <th>语言</th>
-                        <th>标签</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let funccode of funccodeTable.data">
-                        <td> {{ funccode.name }} </td>
-                        <td> {{ funccode.files[0].language }} </td>
-                        <td> {{ funccode.tag }} </td>
-                        <td>
-                            <button nz-button nzType="primary">
-                                <a routerLink="/funccode/editor/{{ funccode.name }}">
-                                    <i nz-icon nzType="edit" nzTheme="outline"></i>
-                                    <span>编辑</span>
-                                </a>
-                            </button>
-                            <button nz-button nzType="primary">
-                                <a routerLink="/funccode/detail/{{ funccode.name }}">
-                                    <i nz-icon nzType="form" nzTheme="outline"></i>
-                                    <span>详情</span>
-                                </a>
-                            </button>
-                            <button nz-button nzType="primary" (click)="onDeleted(funccode.name)">
-                                <i nz-icon nzType="delete" nzTheme="outline"></i>
-                                <span>删除</span>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </nz-table>
+            <nz-spin [nzSpinning]="isLoading" [nzSize]="'large'">
+                <nz-table #funccodeTable [nzData]="listOfFunccode">
+                    <thead>
+                        <tr>
+                            <th>函数名称</th>
+                            <th>语言</th>
+                            <th>标签</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let funccode of funccodeTable.data">
+                            <td> {{ funccode.name }} </td>
+                            <td> </td>
+                            <td> {{ funccode.tag }} </td>
+                            <td>
+                                <button nz-button nzType="primary">
+                                    <a routerLink="/funccode/editor/{{ funccode.name }}">
+                                        <i nz-icon nzType="edit" nzTheme="outline"></i>
+                                        <span>编辑</span>
+                                    </a>
+                                </button>
+                                <button nz-button nzType="primary">
+                                    <a routerLink="/funccode/detail/{{ funccode.name }}">
+                                        <i nz-icon nzType="form" nzTheme="outline"></i>
+                                        <span>详情</span>
+                                    </a>
+                                </button>
+                                <button nz-button nzType="primary" (click)="onDeleted(funccode.name)">
+                                    <i nz-icon nzType="delete" nzTheme="outline"></i>
+                                    <span>删除</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </nz-spin>
         </nz-card>
     </div>
 </div>

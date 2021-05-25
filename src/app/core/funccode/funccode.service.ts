@@ -42,6 +42,7 @@ export class FunccodeService extends ServiceErrorHandler {
   }
 
   private loadFunccodeFromServer(): void {
+    
     this.http.get<WrapRes<Funccode[]>>("/api/funccode/list")
     .pipe(
       catchError(
@@ -49,7 +50,6 @@ export class FunccodeService extends ServiceErrorHandler {
     )
     .subscribe(
       res => {
-        console.log(res.data)//没问题
 
         if (res == undefined) {
           this.notification.error('加载函数数据失败', '', { nzDuration: 0 });
@@ -62,6 +62,7 @@ export class FunccodeService extends ServiceErrorHandler {
         }
 
         let levels: Funccode[] = res.data;
+
         this.funccodes = new Map(levels.map(level => [level.name, level]));  // init
         console.log(this.funccodes)//没问题
         this.notification.success('加载函数数据成功', '');
@@ -73,7 +74,7 @@ export class FunccodeService extends ServiceErrorHandler {
 
     let newLevel: Funccode;
 
-    this.http.post<WrapRes<Funccode>>("/api/Funccode/add", level, httpOptions)
+    this.http.post<WrapRes<Funccode>>("/api/funccode/add", level, httpOptions)
       .pipe(
         catchError(this.handleError('addFunccode', undefined))
       )
@@ -90,6 +91,7 @@ export class FunccodeService extends ServiceErrorHandler {
           }
 
           newLevel = res.data;
+          this.funccodes.delete(newLevel.name)
           this.funccodes.set(newLevel.name, newLevel);
 
           this.notification.success('添加Funccode成功', '');

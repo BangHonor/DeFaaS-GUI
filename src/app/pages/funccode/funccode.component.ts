@@ -19,14 +19,15 @@ export class FunccodeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     if (this.listOfFunccode == undefined) {
-
+      
       this.isLoading = true;
 
       setTimeout(() => {
         this.isLoading = false;
         this.reloadListOfFunccode();
-      }, 10000);
+      }, 1000);
 
     }
 
@@ -36,6 +37,7 @@ export class FunccodeComponent implements OnInit {
 
     this.funccodeService.getListOfFunccode().
       subscribe(listOfFunccode => this.listOfFunccode = [...listOfFunccode]);
+      console.log("listofFunccode:",this.listOfFunccode)
 
   }
 

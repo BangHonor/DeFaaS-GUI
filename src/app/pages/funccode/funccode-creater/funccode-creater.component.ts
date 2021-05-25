@@ -29,10 +29,10 @@ export class FunccodeCreaterComponent implements OnInit {
     this.isResult = false;
     this.createFunccodeForm = this.formBuilder.group({
       name: ['', [Validators.required]],
-      tag: ['0', [Validators.required]],
-      filename: ['0', [Validators.required]],
-      language: ['0', [Validators.required]],
-      code: ['0', [Validators.required]],
+      tag: ['', [Validators.required]],
+      filename: ['', [Validators.required]],
+      language: ['', [Validators.required]],
+      code: ['', [Validators.required]],
     });
   }
 
@@ -76,7 +76,7 @@ export class FunccodeCreaterComponent implements OnInit {
           let code: string = this.createFunccodeForm.get('code').value as string;
 
           
-          this.funccodeService.addFunccode({ "name": name,"tag":tag,"files":[{"filename":filename,"language":language,"code":code}]} as Funccode)
+          this.funccodeService.addFunccode({ name: name,tag:tag,files:[{filename:filename,language:language,code:code}]} as Funccode)
             .subscribe(
               _ => {
                 this.isResult = true;
@@ -90,9 +90,4 @@ export class FunccodeCreaterComponent implements OnInit {
 
     });
   }
-
-
-  get cpu() { return this.createFunccodeForm.get('cpu'); }
-
-  get mem() { return this.createFunccodeForm.get('mem'); }
 }

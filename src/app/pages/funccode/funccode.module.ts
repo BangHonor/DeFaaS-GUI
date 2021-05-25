@@ -21,6 +21,8 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FunccodeCreaterComponent } from './funccode-creater/funccode-creater.component';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzResultModule } from 'ng-zorro-antd/result';
 
 const USED_NZ_MOUDLES = [
   NzTableModule,
@@ -37,6 +39,8 @@ const USED_NZ_MOUDLES = [
   // NzTabsModule,
   NzTagModule,
   NzButtonModule,
+  NzSpinModule,
+  NzResultModule
 ];
 
 
