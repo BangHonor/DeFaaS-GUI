@@ -61,20 +61,17 @@ export class FunccodeService extends ServiceErrorHandler {
           return;
         }
 
-        let levels: Funccode[] = res.data;
-        console.log(levels)
-        this.funccodes = new Map(levels.map(level => [level.name, level]));  // init
+        let funccodes: Funccode[] = res.data;
+        console.log(funccodes)
+        this.funccodes = new Map(funccodes.map(funccode => [funccode.name, funccode]));  // init
         console.log(this.funccodes)//没问题
         this.notification.success('加载函数数据成功', '');
       }
     );
   }
 
-  addFunccode(level: Funccode): Observable<Funccode> {
-
-    let newLevel: Funccode;
-
-    this.http.post<WrapRes<Funccode>>("/api/funccode/add", level, httpOptions)
+  addFunccode(funccode: Funccode): Observable<Funccode> {
+    this.http.post<WrapRes<Funccode>>("/api/funccode/add", funccode, httpOptions)
       .pipe(
         catchError(this.handleError('addFunccode', undefined))
       )
@@ -90,16 +87,33 @@ export class FunccodeService extends ServiceErrorHandler {
             return;
           }
 
-          newLevel = res.data;
-          this.funccodes.delete(newLevel.name)
-          this.funccodes.set(newLevel.name, newLevel);
+          this.funccodes.delete(funccode.name)
+          this.funccodes.set(funccode.name, funccode);
 
           this.notification.success('添加Funccode成功', '');
         }
       );
 
-    return of(newLevel);
+    return of(funccode);
   }
+
+  deleteFunccode(funccode: Funccode): Observable<Funccode> {
+
+    this.http.post<WrapRes<Funccode>>("/api/funccode/delete", funccode, httpOptions)
+      .pipe(
+        catchError(this.handleError('deleteFunccode', undefined))
+      )
+      .subscribe(
+        res => {
+          this.funccodes.delete(funccode.name)
+
+          this.notification.success('删除Funccode成功', '');
+        }
+      );
+
+      return of(funccode);
+  }
+
 
   getListOfFunccode(): Observable<Funccode[]> {
     return of([...this.funccodes.values()]);

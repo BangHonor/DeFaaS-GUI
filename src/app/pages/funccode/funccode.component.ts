@@ -45,18 +45,17 @@ export class FunccodeComponent implements OnInit {
     this.reloadListOfFunccode();
   }
 
-  onDeleted(name: string) {
+  onDeleted(funccode: Funccode) {
 
     this.modal.warning({
 
-      nzTitle: `<i>是否删除函数代码 ${name} ？</i>`,
+      nzTitle: `<i>是否删除函数代码 ${funccode.name} ？</i>`,
       nzContent: '<b>删除后将不可恢复</b>',
       nzOnOk: () =>
         new Promise<void>((resolve, reject) => {
 
-          // TODO
-          // this.funccodeService.deleteFunccode()
-          // this.reloadListOfFunccode()
+          this.funccodeService.deleteFunccode(funccode)
+          this.reloadListOfFunccode()
 
           resolve();
 
