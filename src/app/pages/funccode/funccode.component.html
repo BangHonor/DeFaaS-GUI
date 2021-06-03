@@ -26,7 +26,7 @@
                     <tbody>
                         <tr *ngFor="let funccode of funccodeTable.data">
                             <td> {{ funccode.name }} </td>
-                            <td> </td>
+                            <td> {{ funccode.Files[0].language }}</td>
                             <td> {{ funccode.tag }} </td>
                             <td>
                                 <button nz-button nzType="primary">
