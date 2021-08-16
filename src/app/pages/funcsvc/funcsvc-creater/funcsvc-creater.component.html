@@ -46,7 +46,7 @@
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>竞价时长</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
-                        <nz-input-number formControlName="" [nzMin]="1" [nzMax]="24" [nzStep]="1"
+                        <nz-input-number formControlName="bidDuration" [nzMin]="1" [nzMax]="24" [nzStep]="1"
                             [nzFormatter]="formatterHour" [nzParser]="parserHour">
                         </nz-input-number>
                     </nz-form-control>
@@ -55,7 +55,7 @@
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>服务时长</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
-                        <nz-input-number formControlName="" [nzMin]="1" [nzMax]="2400" [nzStep]="1"
+                        <nz-input-number formControlName="serviceDuration" [nzMin]="1" [nzMax]="2400" [nzStep]="1"
                             [nzFormatter]="formatterHour" [nzParser]="parserHour">
                         </nz-input-number>
                     </nz-form-control>
@@ -64,7 +64,7 @@
                 <nz-form-item>
                     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>可接受最高单价</nz-form-label>
                     <nz-form-control [nzSm]="14" [nzXs]="24">
-                        <nz-input-number formControlName="" [nzMin]="1" [nzMax]="2400" [nzStep]="1"
+                        <nz-input-number formControlName="highestUnitPrice" [nzMin]="1" [nzMax]="2400" [nzStep]="1"
                             [nzFormatter]="formatterFaastoken" [nzParser]="parserFaastoken">
                         </nz-input-number>
                     </nz-form-control>

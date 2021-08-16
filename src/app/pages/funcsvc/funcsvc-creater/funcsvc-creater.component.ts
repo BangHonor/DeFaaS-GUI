@@ -77,16 +77,15 @@ export class FuncsvcCreaterComponent implements OnInit {
         new Promise<void>((resolve, reject) => {
 
           console.log(this.createFuncsvcForm.getRawValue());
-
-          // let funcsvc: Funcsvc;
-
-          // TODO
-          // let faaslevelID: string = this.createFuncsvcForm.get('faaslevelID').value;
-          // funcsvc = ...;
-
-          // TODO
-          // this.funcsvcService.createFuncsvc(funcsvc);
-
+          //前端获取部分信息 具体的价格需要等区块链给出
+          let accountAddress: string = this.createFuncsvcForm.get('accountAddress').value as string;
+          let funccodeName: string = this.createFuncsvcForm.get('funccodeName').value as string;
+          let faaslevelID: string = this.createFuncsvcForm.get('faaslevelID').value as string;
+          let bidDuration: string= this.createFuncsvcForm.get('bidDuration').value as string;
+          let serviceDuration: string= this.createFuncsvcForm.get('serviceDuration').value as string;
+          let highestUnitPrice: string= this.createFuncsvcForm.get('highestUnitPrice').value as string;
+          
+          
           resolve();
         })
           .catch(error => console.log(error))
